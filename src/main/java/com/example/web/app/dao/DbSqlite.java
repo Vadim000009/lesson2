@@ -1,6 +1,6 @@
 package com.example.web.app.dao;
 
-import com.example.web.app.dao.model.User;
+import com.example.web.app.model.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -46,9 +46,9 @@ public class DbSqlite implements InitializingBean {
             ResultSet resultSet = stat.executeQuery(query);
             User user = new User();
             user.setId(resultSet.getInt("id"));
-            user.setBirthday(resultSet.getDate("birthday"));
+           // user.setBirthday(resultSet.getDate("birthday"));
             user.setName(resultSet.getString("name"));
-            user.setNumberPhone(resultSet.getString("phone_number"));
+           // user.setNumberPhone(resultSet.getString("phone_number"));
             return user;
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Не удалось выполнить запрос", ex);

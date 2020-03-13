@@ -2,7 +2,7 @@ package com.example.web.app.controllers;
 
 import com.example.web.app.api.request.UserByIdRequest;
 import com.example.web.app.dao.DbSqlite;
-import com.example.web.app.dao.model.User;
+import com.example.web.app.model.User;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
