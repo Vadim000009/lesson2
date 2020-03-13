@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 public class UserInteractionDAO {
     private Logger log = Logger.getLogger(getClass().getName());
 
-    private String dbPath = "webappp-example.db";
+    private static String dbPath = "webappp-example.db";
+
     public void initDb() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -30,8 +31,6 @@ public class UserInteractionDAO {
         }
     }
 
-
-
     //Инициализация пользовательского списка
     public List<User> Users() {
         List<User> list = new ArrayList<>();
@@ -39,14 +38,17 @@ public class UserInteractionDAO {
     }
 
     //Пользователь вводит данные
-    public void createUser(UserForm form) {
+    public static User createUser(UserForm form) {
+        Logger logStat = null;
+        User user = new User(form.getName(), form.getSurname(), form.getMiddlename(), form.getGender(), form.getInfo());
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
-            stat.execute("INSERT USER(NAME,SURNAME,LASTNAME, GENDER, INFORMATION) VALUSERS('" + form.getName() +
-                    "','" + form.getSurname() + "','" + form.getMiddlename() + "','" + form.getGender() + "','" + form.getInfo() + "')");
+            stat.execute("INSERT USER(NAME,SURNAME,LASTNAME, GENDER, INFORMATION) VALUES('" + user.getName() +
+                    "','" + user.getSurname() + "','" + user.getLastname() + "','" + user.getGender() + "','" + user.getInfo() + "')");
         } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
+            logStat.log(Level.WARNING, "Не удалось выполнить запрос", ex);
         }
+        return user;
     }
 
     //Пользователь смотрит данные

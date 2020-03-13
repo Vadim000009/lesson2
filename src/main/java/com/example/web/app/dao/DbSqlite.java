@@ -1,10 +1,12 @@
 package com.example.web.app.dao;
 
-import com.example.web.app.model.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,20 +41,20 @@ public class DbSqlite implements InitializingBean {
         }
     }
 
-    public User selectUserById(int id) {
+ /*   public User selectUserById(int id) {
         String query = "select * from USER where id = " + id;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(query);
-            User user = new User();
+    User user = new User();
             user.setId(resultSet.getInt("id"));
-           // user.setBirthday(resultSet.getDate("birthday"));
-            user.setName(resultSet.getString("name"));
-           // user.setNumberPhone(resultSet.getString("phone_number"));
-            return user;
-        } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
-            return new User();
-        }
-    }
-}
+                    user.setBirthday(resultSet.getDate("birthday"));
+                    user.setName(resultSet.getString("name"));
+                    user.setNumberPhone(resultSet.getString("phone_number"));
+                    return user;
+                    } catch (SQLException ex) {
+                    log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
+                    return new User();
+                    }
+                    }*/
+                    }

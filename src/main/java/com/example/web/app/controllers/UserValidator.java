@@ -1,6 +1,5 @@
 package com.example.web.app.controllers;
 
-import com.example.web.app.api.request.UserForm;
 import com.example.web.app.dao.UserInteractionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,13 +18,11 @@ public class UserValidator implements Validator {
     private UserInteractionDAO userDAO;
 
     public void validate(Object target, Errors errors) {
-        UserForm userForm = (UserForm) target;
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.appUserForm.userName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "secondName", "NotEmpty.appUserForm.firstName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.appUserForm.lastName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "NotEmpty.appUserForm.gender");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "info", "NotEmpty.appUserForm.countryCode");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.UserForm.name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "secondName", "NotEmpty.UserForm.middlename");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "surName", "NotEmpty.UserForm.surname");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "NotEmpty.UserForm.gender");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "info", "NotEmpty.UserForm.info");
 
     }
 

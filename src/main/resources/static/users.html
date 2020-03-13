@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:utext="${title}"></title>
+</head>
+
+<style>
+    table th, table td {
+        padding: 5px;
+    }
+    .message {
+        color: blue;
+    }
+</style>
+
+<body>
+
+<h2>Users</h2>
+
+
+
+<table border="1">
+    <tr>
+        <th>User Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+    </tr>
+    <tr th:each ="users : ${users}">
+        <td th:utext="${users.firstName}">...</td>
+        <td th:utext="${users.secondName}">...</td>
+        <td th:utext="${users.lastName}">...</td>
+        <td th:utext="${users.gender}">...</td>
+        <td th:utext="${users.info}">...</td>
+    </tr>
+    <td>
+        <input type="button" value="next" />
+        <input type="button" value="previous" />
+</table>
+
+</body>
+</html>
