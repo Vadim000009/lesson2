@@ -29,9 +29,9 @@ public class SwaggerConfig {
 
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
-                .title("Rest API")
-                .description("Данный сервис для использование API")
-                .version("0.0.1")
+                .title("Micro soft service")
+                .description("Данный сервис для использование лабы")
+                .version("0.0.1.1")
                 .build();
     }
 }

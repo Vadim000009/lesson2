@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>register</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+          <title th:utext="${title}"></title>
+          <style>
+             th, td {
+                 padding: 5px;
+                 }
+             td span  {
+                 font-size:90%;
+                 font-style: italic;
+                 color: red;
+                 }
+             .error {
+                 color: red;
+                 font-style: italic;
+                 }
+          </style>
+       </head>
+   <body>
 
-</body>
+      <th:block th:include="/_menu"></th:block>
+       
+      <h2>Register</h2>
+       
+      <form th:action="@{/register}" th:object="${userForm}" method="POST">
+             <table>
+                <tr>
+                   <td>First name</td>
+                   <td><input type="text" th:field="*{firstname}" /></td>
+                   <td>
+                      <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">..</span>
+                   </td>
+                </tr>
+                <tr>
+                   <td>Second name</td>
+                   <td><input type="text" th:field="*{secondname}" /> </td>
+                   <td>
+                      <span th:if="${#fields.hasErrors('secondname')}" th:errors="*{secondname}">..</span>
+                   </td>
+                </tr>
+                <tr>
+                   <td>Last name</td>
+                   <td><input type="text" th:field="*{lastname}" /> </td>
+                   <td>
+                      <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">..</span>
+                   </td>
+                </tr>
+                <tr>
+                   <td>Gender</td>
+                   <td>
+                      <select th:field="*{gender}">
+                         <option value=""> -- </option>
+                         <option value="Male">Male</option>
+                         <option value="Female">Female</option>
+                         <option value="HELICOPTER">AH-64 Apache</option>
+                         <option value="Nogender">Havent gender</option>
+                      </select>
+                   </td>
+                   <td>
+                      <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">..</span>
+                   </td>
+                </tr>
+                <tr>
+                   <td>Information about you</td>
+                   <td><input type="text" th:field="*{info}" /> </td>
+                   <td>
+                      <span th:if="${#fields.hasErrors('info')}" th:errors="*{info}">..</span>
+                   </td>
+                </tr>
+                <tr>
+                   
+                   <td>
+                      <input type="submit" value="Submit" />
+                      <a th:href="@{/}">Cancel</a>
+                   </td>
+                   
+                </tr>
+             </table>
+          </form>
+       
+   </body>
 </html>

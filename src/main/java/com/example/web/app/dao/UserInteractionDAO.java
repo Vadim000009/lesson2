@@ -42,8 +42,8 @@ public class UserInteractionDAO {
     public void createUser(UserForm form) {
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
-            stat.execute("INSERT USER(NAME,SURNAME,LASTNAME, GENDER, INFORMATION) VALUSERS('"+ form.getName() +
-                    "','" + form.getSurname() + "','" form.getMiddlename() + "','" form.getGender() + "','" + form.getInfo() + "')");
+            stat.execute("INSERT USER(NAME,SURNAME,LASTNAME, GENDER, INFORMATION) VALUSERS('" + form.getName() +
+                    "','" + form.getSurname() + "','" + form.getMiddlename() + "','" + form.getGender() + "','" + form.getInfo() + "')");
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
         }
@@ -82,4 +82,4 @@ public class UserInteractionDAO {
             return new User();
         }
     }*/
-}
+
