@@ -2,24 +2,26 @@ package com.example.web.app.dao;
 
 import com.example.web.app.api.request.UserForm;
 import com.example.web.app.model.User;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Service()
+@Repository()
 public class UserInteractionDAO {
     private Logger log = Logger.getLogger(getClass().getName());
+    private int id = 0;
 
     private static String dbPath = "webappp-example.db";
+    private static final Map<Integer, User> USERS_MAP = new HashMap<>();
+
+    public void afterPropertiesSet() throws Exception {
+        initDb();
+    }
 
     public void initDb() {
         try {
@@ -31,10 +33,14 @@ public class UserInteractionDAO {
         }
     }
 
-    //Инициализация пользовательского списка
-    public List<User> Users() {
-        List<User> list = new ArrayList<>();
-        return list;
+    public Boolean execute(String query) {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             Statement stat = conn.createStatement()) {
+            return stat.execute(query);
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
+            return false;
+        }
     }
 
     //Пользователь вводит данные
@@ -52,36 +58,31 @@ public class UserInteractionDAO {
     }
 
     //Пользователь смотрит данные
-    private void getNewUserInDB(int id){
-        Map<Integer, User> userList = new HashMap<>();
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             Statement stat = conn.createStatement()) {
-
-
-
-            //
-        } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
-        }
-        }
-    }
-
-    //Пользователь нажимает вперёд назад
-
-  /*  public User selectUserById(int id) {
+    public static List<UserForm> getUserFromDB(int id) {
+        Logger logStat = null;
         String query = "select * from USER where id = " + id;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(query);
-            User user = new User();
-            user.setId(resultSet.getInt("id"));
-            user.setName(resultSet.getString("name"));
-            user.setSurname(resultSet.getString("surname"));
-            user.setLastname(resultSet.getString("lastname"));
-            return user;
+            User user = new User(resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("lastname"), resultSet.getString("gender"), resultSet.getString("info"));
+            USERS_MAP.put(id, user);
+            return null;
         } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
-            return new User();
+            logStat.log(Level.WARNING, "Не удалось выполнить запрос", ex);
         }
-    }*/
+        return null;
+    }
+
+    //Пользователь нажимает вперёд назад
+    public List<UserForm> pressButton(boolean where) {
+        if (where == true) {
+            id--;
+            getUserFromDB(id);
+        } else {
+            id++;
+            getUserFromDB(id);
+        }
+        return null;
+    }
+}
 
