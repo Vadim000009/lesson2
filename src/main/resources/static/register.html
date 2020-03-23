@@ -1,75 +1,49 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang = "ru">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
-    <title th:utext="${title}"></title>
-    <style>
-        th, td {
-            padding: 5px;
+    <title>Регистрация</title>
+    <script type="text/javascript">
+        function createUser() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "api/create/new/user");
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onload = (e) => {
+                alert("Получен ответ" + e.target.response)
+            };
+            var user_name = document.getElementById("firstName").value;
+            var user_numberPhone = document.getElementById("numberPhone").value;
+            var params = {"name" : user_name, "numberPhone" : user_numberPhone};
+            xhr.send(JSON.stringify(params));
         }
-        td span  {
-            font-size:90%;
-            font-style: italic;
-            color: red;
-        }
-    </style>
+    </script>
 </head>
 <body>
+    <h2>Регистрация</h2>
 
-    <h2>Register</h2>
-
-    <form th:action="@{/register}" th:object="${UserForm}" method="POST">
-        <table>
-            <tr>
-                <td>First name</td>
-                <td><input type="text" th:field="*{firstname}" /></td>
-                <td>
-                    <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">..</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Second name</td>
-                <td><input type="text" th:field="*{secondname}" /> </td>
-                <td>
-                    <span th:if="${#fields.hasErrors('secondname')}" th:errors="*{secondname}">..</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Last name</td>
-                <td><input type="text" th:field="*{lastname}" /> </td>
-                <td>
-                    <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">..</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Gender</td>
-                <td>
-                    <select th:field="*{gender}">
-                        <option value=""> -- </option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="HELICOPTER">AH-64 Apache</option>
-                        <option value="Nogender">Havent gender</option>
-                    </select>
-                </td>
-                <td>
-                    <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">..</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Information about you</td>
-                <td><input type="text" th:field="*{info}" /> </td>
-                <td>
-                    <span th:if="${#fields.hasErrors('info')}" th:errors="*{info}">..</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Submit" />
-                    <a th:href="@{/}">Cancel</a>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div id="regForm">
+        <form onsubmit="createUser()">
+            <input type="text" id="frstName" placeholder="Имя" />
+            <input type="text" id="secName" placeholder="Фамилия" />
+            <input type="text" id="patronymic" placeholder="Отчество" />
+            <label>
+                <select name="gender[]">
+                    <option disabled>Ваш пол</option>
+                    <option selected value="">не указан</option>
+                    <option value="Male">Мужской</option>
+                    <option value="Female">Женский</option>
+                    <option value="Helicopter">AH-64 Apache</option>
+                </select>
+            </label>
+            <input type="date" id="dateBirthday" placeholder="Дата рождения" />
+            <input type="email" id="email" placeholder="Email" />
+            <input type="number" id="tel" placeholder="номер телефона" />
+            <input type="password" id="password" placeholder="Пароль" />
+            <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" />
+            <input type="text" id="info" placeholder="Информация о себе" />
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
 
 </body>
 </html>
