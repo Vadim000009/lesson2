@@ -30,8 +30,8 @@ public class SwaggerConfig {
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
                 .title("Micro soft service")
-                .description("Данный сервис для использование лабы")
-                .version("0.0.1.1")
+                .description("Создаю фигню уже 4-ю неделю. А мог бы написать диплом без слов 'утопить бы тебя в реке'")
+                .version("0.0.1.2")
                 .build();
     }
 }

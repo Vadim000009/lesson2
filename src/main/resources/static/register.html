@@ -11,9 +11,18 @@
             xhr.onload = (e) => {
                 alert("Получен ответ" + e.target.response)
             };
-            var user_name = document.getElementById("firstName").value;
-            var user_numberPhone = document.getElementById("numberPhone").value;
-            var params = {"name" : user_name, "numberPhone" : user_numberPhone};
+            var user_fstName = document.getElementById("fstName").value;
+            var user_secName = document.getElementById("secName").value;
+            var user_patronymic = document.getElementById("patronymic").value;
+            var user_gender = document.getElementById("gender").value;
+            var user_dateBirthday = document.getElementById("dateBirthday").value;
+            var user_email = document.getElementById("email").value;
+            var user_telephone = document.getElementById("telephone").value;
+            var user_password = document.getElementById("password").value;
+            var user_info= document.getElementById("info").value;
+            var params = {"fstName" : user_fstName, "secName" : user_secName, "patronymic" : user_patronymic, "gender" : user_gender,
+                "dateBirthday" : user_dateBirthday, "email" : user_email, "telephone" : user_telephone,
+                "password" : user_password, "info" : user_info };
             xhr.send(JSON.stringify(params));
         }
     </script>
@@ -23,13 +32,13 @@
 
     <div id="regForm">
         <form onsubmit="createUser()">
-            <input type="text" id="frstName" placeholder="Имя" />
+            <input type="text" id="fstName" placeholder="Имя" />
             <input type="text" id="secName" placeholder="Фамилия" />
             <input type="text" id="patronymic" placeholder="Отчество" />
             <label>
-                <select name="gender[]">
+                <select name="gender">
                     <option disabled>Ваш пол</option>
-                    <option selected value="">не указан</option>
+                    <option value="NOGENDER">-</option>
                     <option value="Male">Мужской</option>
                     <option value="Female">Женский</option>
                     <option value="Helicopter">AH-64 Apache</option>
@@ -37,7 +46,7 @@
             </label>
             <input type="date" id="dateBirthday" placeholder="Дата рождения" />
             <input type="email" id="email" placeholder="Email" />
-            <input type="number" id="tel" placeholder="номер телефона" />
+            <input type="number" id="telephone" placeholder="номер телефона" />
             <input type="password" id="password" placeholder="Пароль" />
             <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" />
             <input type="text" id="info" placeholder="Информация о себе" />

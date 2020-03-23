@@ -1,42 +1,54 @@
 package com.example.web.app.model;
 
+import java.util.Date;
+
 public class User {
-    private String name;
-    private String surname;
-    private String lastname;
+    private String fstName;
+    private String secName;
+    private String patronymic;
     private String gender;
+    private Date dateBirthday;
+    private String email;
+    private String telephone;
+    private String password;
     private String info;
 
-    public User(String name, String surname, String lastname, String gender, String info) {
-        this.name = name;
-        this.surname = surname;
-        this.lastname = lastname;
+    public User() {}
+
+    public User(String fstName, String secName, String patronymic, String gender, Date dateBirthday, String email, String telephone, String password, String info) {
+        this.fstName = fstName;
+        this.secName = secName;
+        this.patronymic = patronymic;
         this.gender = gender;
+        this.dateBirthday = dateBirthday;
+        this.email = email;
+        this.telephone = telephone;
+        this.password = password;
         this.info = info;
     }
 
-    public String getName() {
-        return name;
+    public String getFstName() {
+        return fstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFstName(String fstName) {
+        this.fstName = fstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getSecName() {
+        return secName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSecName(String secName) {
+        this.secName = secName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getPatronymic() {
+        return patronymic;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 
     public String getGender() {
@@ -45,6 +57,38 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Date getDateBirthday() {
+        return dateBirthday;
+    }
+
+    public void setDateBirthday(Date dateBirthday) {
+        this.dateBirthday = dateBirthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getInfo() {
