@@ -1,7 +1,7 @@
-package com.example.web.app.controllers;
+package com.beernetwork.web.app.controllers;
 
-import com.example.web.app.dao.UserInteractionDAO;
-import com.example.web.app.model.User;
+import com.beernetwork.web.app.dao.UserInteractionDAO;
+import com.beernetwork.web.app.model.User;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

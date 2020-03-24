@@ -1,4 +1,4 @@
-package com.example.web.app.api.request;
+package com.beernetwork.web.app.api.request;
 
 public class UserByIdRequest {
     private Integer id;

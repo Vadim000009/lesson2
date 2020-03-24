@@ -1,4 +1,4 @@
-package com.example.web.app.model;
+package com.beernetwork.web.app.model;
 
 import java.util.Date;
 
@@ -13,21 +13,6 @@ public class User {
     private String telephone;
     private String password;
     private String info;
-
-/*    public User() {}
-
-    public User(Integer id, String fstName, String secName, String patronymic, String gender, Date dateBirthday, String email, String telephone, String password, String info) {
-        this.id = id;
-        this.fstName = fstName;
-        this.secName = secName;
-        this.patronymic = patronymic;
-        this.gender = gender;
-        this.dateBirthday = dateBirthday;
-        this.email = email;
-        this.telephone = telephone;
-        this.password = password;
-        this.info = info;
-    }*/
 
     public Integer getId() {
         return id;

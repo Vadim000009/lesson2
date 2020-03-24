@@ -8,9 +8,7 @@
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "api/create/new/user");
             xhr.setRequestHeader("Content-type", "application/json");
-            xhr.onload = (e) => {
-                alert("Получен ответ" + e.target.response)
-            };
+
             var user_fstName = document.getElementById("fstName").value;
             var user_secName = document.getElementById("secName").value;
             var user_patronymic = document.getElementById("patronymic").value;
@@ -33,9 +31,9 @@
 
     <div id="regForm">
         <form onsubmit="createUser()">
-            <input type="text" id="fstName" placeholder="Имя" />
-            <input type="text" id="secName" placeholder="Фамилия" />
-            <input type="text" id="patronymic" placeholder="Отчество" />
+            <input type="text" id="fstName" placeholder="Имя" required/>
+            <input type="text" id="secName" placeholder="Фамилия" required/>
+            <input type="text" id="patronymic" placeholder="Отчество" required/>
                 <select id="gender" onchange=>
                     <option disabled>Ваш пол</option>
                     <option value="NOGENDER">-</option>
@@ -44,10 +42,10 @@
                     <option value="Helicopter">AH-64 Apache</option>
                 </select>
             <input type="date" id="dateBirthday" placeholder="Дата рождения" />
-            <input type="email" id="email" placeholder="Email" />
-            <input type="number" id="telephone" placeholder="номер телефона" />
-            <input type="password" id="password" placeholder="Пароль" />
-            <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" />
+            <input type="email" id="email" placeholder="Email" required/>
+            <input type="number" id="telephone" placeholder="номер телефона" required/>
+            <input type="password" id="password" placeholder="Пароль" required/>
+            <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" required/>
             <input type="text" id="info" placeholder="Информация о себе" />
             <button type="submit">Отправить</button>
         </form>

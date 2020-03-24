@@ -51,10 +51,11 @@
 ////    }
 //
 //}
-package com.example.web.app.controllers;
+package com.beernetwork.web.app.controllers;
 
-import com.example.web.app.dao.UserInteractionDAO;
-import com.example.web.app.model.User;
+import com.beernetwork.web.app.api.request.UserByIdRequest;
+import com.beernetwork.web.app.dao.UserInteractionDAO;
+import com.beernetwork.web.app.model.User;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -75,13 +76,12 @@ public class SelectUserController {
     }
 
     @ApiOperation(value = "Получить данные пользователя")
-    @RequestMapping(value = "/create/new/user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> selectUser (@RequestBody User user) {
-
-        Boolean bool = UIDAO.getUserFromDB(user);
+    @RequestMapping(value = "by/id", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> selectUser (@RequestBody UserByIdRequest id) {
+        User user = UIDAO.getUserFromDB(id.getId());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
+        return new ResponseEntity<>(user, headers, HttpStatus.OK);
     }
 }

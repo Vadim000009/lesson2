@@ -3,43 +3,47 @@
 <head>
     <title>Пользователи</title>
     <script type="text/javascript">
-        function createUser() {
+        function selectUser() {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "api/create/new/user");
             xhr.setRequestHeader("Content-type", "application/json");
-            xhr.onload = (e) => {
-                alert("Получен ответ" + e.target.response)
+            var data = {
+                fstName: "",
+                secName: "",
+                patronymic: "",
+                gender: "",
+                info: "",
             };
-
-            var inputFromDB = document.createElement("input");
-            inputFromDB.setAttribute("fstName", frsName);
-            inputFromDB.setAttribute("secName", secName);
-            inputFromDB.setAttribute("patronymic", patronymic);
-            inputFromDB.setAttribute("gender", gender);
-            inputFromDB.setAttribute("info", info);
-            $('body').append(inputFromDB);
+            var obj = JSON.parse(xhr.getResponseHeader());
+            document.getElementById("frsName").innerHTML;
+            document.getElementById("secName").innerHTML;
+            document.getElementById("patronymic").innerHTML;
+            document.getElementById("gender").innerHTML;
+            document.getElementById("info").innerHTML;
         }
     </script>
 </head>
 <body>
-    <h2>Users</h2>
+    <h2>Пользователи</h2>
     <table border="1">
         <tr>
-            <th>Name</th>
-                <th>Middle name</th>
-                <th>Second name</th>
-                <th>Gender</th>
-                <th>Info</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Пол</th>
+                <th>Информация</th>
             </tr>
             <tr>
-                <td><input id="fstName" value=""></td>
-                <td><input id="secName" value=""></td>
-                <td><input id="patronymic" value=""></td>
-                <td><input id="gender" value=""></td>
-                <td><input id="info" value=""></td>
+                <form onsubmit="selectUser()">
+                <td><output name="fstName"></output></td>
+                <td><output name="secName"></output></td>
+                <td><output name="patronymic"></output></td>
+                <td><output name="gender"></output></td>
+                <td><output name="info"></output></td>
+                </form>
             </tr>
         </table>
-        <button type="submit" value="true">next</button>
-        <button type="submit" value="false">previous</button>
+        <input id="next" type="submit" value="Следующий">
+        <input id="previous" type="submit" value="Предыдущий">
 </body>
 </html>

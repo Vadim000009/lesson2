@@ -1,4 +1,4 @@
-package com.example.web.app.config;
+package com.beernetwork.web.app.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

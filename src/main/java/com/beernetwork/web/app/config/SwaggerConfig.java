@@ -1,4 +1,4 @@
-package com.example.web.app.config;
+package com.beernetwork.web.app.config;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Micro soft service")
                 .description("Создаю фигню уже 4-ю неделю. А мог бы написать диплом без слов 'утопить бы тебя в реке'")
-                .version("0.0.1.2")
+                .version("0.0.1.3")
                 .build();
     }
 }
