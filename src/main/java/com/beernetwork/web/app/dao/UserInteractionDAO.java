@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class UserInteractionDAO implements InitializingBean {
     private Logger log = Logger.getLogger(getClass().getName());
 
-    private static String dbPath = "webappp-example.db";    // переименовать
+    private static String dbPath = "beer-network.db";    // переименовать
 
     @Override
     public void afterPropertiesSet() throws Exception {
