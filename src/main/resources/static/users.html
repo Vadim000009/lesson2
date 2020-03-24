@@ -3,10 +3,16 @@
 <head>
     <title>Пользователи</title>
     <script type="text/javascript">
-        function selectUser() {
+
+        function previousUser() {
+            var id = selectUser(0);
+        }
+        function nextUser() {
+            var id = selectUser(1);
+        }
+        function selectUser(number) {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "api/create/new/user");
-            xhr.setRequestHeader("Content-type", "application/json");
             var data = {
                 fstName: "",
                 secName: "",
@@ -14,7 +20,7 @@
                 gender: "",
                 info: "",
             };
-            var obj = JSON.parse(xhr.getResponseHeader());
+            var obj = JSON.parse(xhr.getResponseHeader("Content-type", "application/json"));
             document.getElementById("frsName").innerHTML;
             document.getElementById("secName").innerHTML;
             document.getElementById("patronymic").innerHTML;
@@ -34,7 +40,7 @@
                 <th>Информация</th>
             </tr>
             <tr>
-                <form onsubmit="selectUser()">
+                <form onsubmit="selectUser(number)">
                 <td><output name="fstName"></output></td>
                 <td><output name="secName"></output></td>
                 <td><output name="patronymic"></output></td>
@@ -43,7 +49,7 @@
                 </form>
             </tr>
         </table>
-        <input id="next" type="submit" value="Следующий">
-        <input id="previous" type="submit" value="Предыдущий">
+    <form onsubmit="previousUser()"></form><input id="next" type="submit" value="Предыдущий"></form>
+    <form onsubmit="nextUser()"><input id="previous" type="submit" value="Следующий"></form>
 </body>
 </html>

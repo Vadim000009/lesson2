@@ -11,10 +11,8 @@ import java.util.logging.Logger;
 @Service
 public class UserInteractionDAO implements InitializingBean {
     private Logger log = Logger.getLogger(getClass().getName());
-//    private int id = 0;
 
     private static String dbPath = "webappp-example.db";    // переименовать
-//    private static final Map<Integer, User> USERS_MAP = new HashMap<>();
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -46,6 +44,9 @@ public class UserInteractionDAO implements InitializingBean {
     * На основе нажатия кнопки, пользователь получает информацию о том или ином пользователе. Шаг всегда +-1.
     */
     public User getUserFromDB(int id) {
+        if(id == 0) {
+            id--;
+        }
         String query = "select fstName, secName, patronymic, gender, dateBirthday, info from USER where id = " + id;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {

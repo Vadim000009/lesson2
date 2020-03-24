@@ -22,7 +22,7 @@ public class CreateNewUser {
     }
 
     @ApiOperation(value = "Создание нового User")
-    @RequestMapping(value = "/create/new/user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/com/beernetwork/web/app/controllers/CreateNewUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> createNewUser (@RequestBody User user) {
 
         Boolean bool = UIDAO.createNewUser(user);
