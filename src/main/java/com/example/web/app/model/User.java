@@ -3,6 +3,7 @@ package com.example.web.app.model;
 import java.util.Date;
 
 public class User {
+    private Integer id;
     private String fstName;
     private String secName;
     private String patronymic;
@@ -13,9 +14,10 @@ public class User {
     private String password;
     private String info;
 
-    public User() {}
+/*    public User() {}
 
-    public User(String fstName, String secName, String patronymic, String gender, Date dateBirthday, String email, String telephone, String password, String info) {
+    public User(Integer id, String fstName, String secName, String patronymic, String gender, Date dateBirthday, String email, String telephone, String password, String info) {
+        this.id = id;
         this.fstName = fstName;
         this.secName = secName;
         this.patronymic = patronymic;
@@ -25,6 +27,14 @@ public class User {
         this.telephone = telephone;
         this.password = password;
         this.info = info;
+    }*/
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFstName() {

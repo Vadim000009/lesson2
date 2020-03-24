@@ -1,15 +1,26 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
-    <title th:utext="${title}"></title>
+    <title>Пользователи</title>
+    <script type="text/javascript">
+        function createUser() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "api/create/new/user");
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onload = (e) => {
+                alert("Получен ответ" + e.target.response)
+            };
+
+            var inputFromDB = document.createElement("input");
+            inputFromDB.setAttribute("fstName", frsName);
+            inputFromDB.setAttribute("secName", secName);
+            inputFromDB.setAttribute("patronymic", patronymic);
+            inputFromDB.setAttribute("gender", gender);
+            inputFromDB.setAttribute("info", info);
+            $('body').append(inputFromDB);
+        }
+    </script>
 </head>
-
-<style>
-    table th, table td {
-        padding: 5px;
-    }
-</style>
-
 <body>
     <h2>Users</h2>
     <table border="1">
@@ -20,12 +31,12 @@
                 <th>Gender</th>
                 <th>Info</th>
             </tr>
-            <tr th:each ="users : ${users}">
-                <td th:utext="${users.firstName}">...</td>
-                <td th:utext="${users.secondName}">...</td>
-                <td th:utext="${users.lastName}">...</td>
-                <td th:utext="${users.gender}">...</td>
-                <td th:utext="${users.info}">...</td>
+            <tr>
+                <td><input id="fstName" value=""></td>
+                <td><input id="secName" value=""></td>
+                <td><input id="patronymic" value=""></td>
+                <td><input id="gender" value=""></td>
+                <td><input id="info" value=""></td>
             </tr>
         </table>
         <button type="submit" value="true">next</button>

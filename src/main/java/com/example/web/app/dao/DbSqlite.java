@@ -46,15 +46,14 @@ public class DbSqlite implements InitializingBean {
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(query);
-    User user = new User();
+            User user = new User();
             user.setId(resultSet.getInt("id"));
-                    user.setBirthday(resultSet.getDate("birthday"));
-                    user.setName(resultSet.getString("name"));
-                    user.setNumberPhone(resultSet.getString("phone_number"));
-                    return user;
-                    } catch (SQLException ex) {
-                    log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
-                    return new User();
-                    }
-                    }*/
-                    }
+            user.setBirthday(resultSet.getDate("birthday"));
+            user.setName(resultSet.getString("name"));
+            user.setNumberPhone(resultSet.getString("phone_number"));
+            return user;
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
+        return new User();
+    }*/
+}

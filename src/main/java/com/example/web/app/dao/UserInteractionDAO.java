@@ -4,10 +4,7 @@ import com.example.web.app.model.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,20 +56,55 @@ public class UserInteractionDAO implements InitializingBean {
 //    }
 
     //Пользователь смотрит данные
-//    public static List<UserForm> getUserFromDB(int id) {
+    public User getUserFromDB(int id) {
+            String query = "select fstName, secName, patronymic, gender, dateBirthday, info from USER where id = " + id;
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+                 Statement stat = conn.createStatement()) {
+                ResultSet resultSet = stat.executeQuery(query);
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setDateBirthday(resultSet.getDate("birthday"));
+                user.setName(resultSet.getString("name"));
+                user.setNumberPhone(resultSet.getString("phone_number"));
+                return user;
+            } catch (SQLException ex) {
+                log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
+                return new User();
+//    public Boolean getUserFromDB(int id) {
 //        Logger logStat = null;
-//        String query = "select * from USER where id = " + id;
+//        String query = "SELECT fstName, secName, patronymic, gender, dateBirthday, info FROM USER WHERE id = " + id;
 //        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
 //             Statement stat = conn.createStatement()) {
 //            ResultSet resultSet = stat.executeQuery(query);
-//            User user = new User(resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("lastname"), resultSet.getString("gender"), resultSet.getString("info"));
-//            USERS_MAP.put(id, user);
-//            return null;
+//
+//            User user = new User();
+//            /*(resultSet.getString("fstName"), resultSet.getString("secName"),
+//                    resultSet.getString("patronymic"), resultSet.getString("gender"),
+//                    resultSet.getDate("dateBirthday"), resultSet.getString("info"));*/
+//
+//            return true;
 //        } catch (SQLException ex) {
 //            logStat.log(Level.WARNING, "Не удалось выполнить запрос", ex);
 //        }
-//        return null;
+//        return false;
+    }
 //    }
+/*    public User selectUserById(int id) {
+        String query = "select * from USER where id = " + id;
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             Statement stat = conn.createStatement()) {
+            ResultSet resultSet = stat.executeQuery(query);
+            User user = new User();
+            user.setId(resultSet.getInt("id"));
+            user.setBirthday(resultSet.getDate("birthday"));
+            user.setName(resultSet.getString("name"));
+            user.setNumberPhone(resultSet.getString("phone_number"));
+            return user;
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
+            return new User();
+        }
+    }*/
 
     //Пользователь нажимает вперёд назад
 //    public List<UserForm> pressButton(boolean where) {
@@ -95,7 +127,7 @@ public class UserInteractionDAO implements InitializingBean {
                 + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
                 user.getDateBirthday() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
                 user.getInfo() + "');";
-        System.out.println(query);
+    //    System.out.println(query);
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
             Statement stat = conn.createStatement();
             return stat.execute(query);
