@@ -27,18 +27,18 @@
             xhr.setRequestHeader("Content-type", "application/json");
             var params = {"id" : number};
             xhr.send(JSON.stringify(params));
-            xhr.onreadystatechange = function() {
-                myObj = JSON.parse(this.responseText);
-                txt += "<table border='1'>"
-                for (x in myObj) {
-                    txt += "<tr><td>" + myObj[x].name + "</td></tr>";
-                }
-                txt += "</table>"
-                document.getElementById("test").innerHTML = txt;
-
+            // xhr.onreadystatechange = function() {
+            //     myObj = JSON.parse(this.responseText);
+            //     txt += "<table border='1'>"
+            //     for (x in myObj) {
+            //         txt += "<tr><td>" + myObj[x].name + "</td></tr>";
+            //     }
+            //     txt += "</table>"
+            //     document.getElementById("test").innerHTML = txt;
+            // }
             xhr.onload = (e) => {
                 alert("Получен ответ" + e.target.response);
-                obj = JSON.parse(this.obj, data);
+                // obj = JSON.parse(this.obj, data);
                 // document.getElementById("fstName").innerHTML = obj.fstName;
                 // var obj = JSON.parse(xhr.getResponseHeader("Content-type", "application/json"));
                 // var a = obj.document.getElementById("frsName").innerHTML;
@@ -66,16 +66,16 @@
             <tr>
                 <form onsubmit="selectUser(number)">
                     <td><output name="fstName" id="fstName"></output></td>
-                <td><output name="secName" id="secName"></output></td>
-                <td><output name="patronymic"></output></td>
-                <td><output name="gender"></output></td>
-                <td><output name="dateBirthday"></output></td>
-                <td><output name="info"></output></td>
+                    <td><output name="secName" id="secName"></output></td>
+                    <td><output name="patronymic"></output></td>
+                    <td><output name="gender"></output></td>
+                    <td><output name="dateBirthday"></output></td>
+                    <td><output name="info"></output></td>
                     <div id="test"></div>
                 </form>
             </tr>
         </table>
-    <form onsubmit="previousUser()"><input id="next" type="submit" value="Предыдущий"></form>
-    <form onsubmit="nextUser()"><input id="previous" type="submit" value="Следующий"></form>
+    <input id="next" type="submit" value="Предыдущий" onclick="previousUser()">
+    <input id="previous" type="submit" value="Следующий" onclick="nextUser()">
 </body>
 </html>
