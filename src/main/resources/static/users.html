@@ -16,26 +16,29 @@
         function selectUser(number) {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "api/select/user/by/SelectUser");
-            // var data = {
-            //     fstName: "",
-            //     secName: "",
-            //     patronymic: "",
-            //     gender: "",
-            //     info: "",
-            // };
+             var data = {
+                 fstName: "",
+                 secName: "",
+                 patronymic: "",
+                 gender: "",
+                 dateBirthday: "",
+                 info: "",
+            };
             xhr.setRequestHeader("Content-type", "application/json");
             var params = {"id" : number};
             xhr.send(JSON.stringify(params));
             xhr.onload = (e) => {
-                var obj = JSON.parse(e.target.response);
-                // alert("Получен ответ" + e.target.response);
-            // var obj = JSON.parse(xhr.getResponseHeader("Content-type", "application/json"));
-            obj.document.getElementById("frsName").innerHTML;
-            obj.document.getElementById("secName").innerHTML;
-            obj.document.getElementById("patronymic").innerHTML;
-            obj.document.getElementById("gender").innerHTML;
-            obj.document.getElementById("info").innerHTML;
-            console.log(this.obj.toString());
+                alert("Получен ответ" + e.target.response);
+                obj = JSON.parse(this.obj, data);
+                // document.getElementById("fstName").innerHTML = obj.fstName;
+                // var obj = JSON.parse(xhr.getResponseHeader("Content-type", "application/json"));
+                // var a = obj.document.getElementById("frsName").innerHTML;
+                // var b = obj.document.getElementById("secName").innerHTML;
+                // var c = obj.document.getElementById("patronymic").innerHTML;
+                // var d = obj.document.getElementById("gender").innerHTML;
+                // var t = obj.document.getElementById("dateBirthday").innerHTML;
+                // var f = obj.document.getElementById("info").innerHTML;
+                // console.log(this.obj.toString());
             };
         }
     </script>
@@ -48,15 +51,18 @@
                 <th>Фамилия</th>
                 <th>Отчество</th>
                 <th>Пол</th>
+                <th>День рождения</th>
                 <th>Информация</th>
             </tr>
             <tr>
                 <form onsubmit="selectUser(number)">
-                <td><output name="fstName"></output></td>
-                <td><output name="secName"></output></td>
+                    <td><output name="fstName" id="fstName"></output></td>
+                <td><output name="secName" id="secName"></output></td>
                 <td><output name="patronymic"></output></td>
                 <td><output name="gender"></output></td>
+                <td><output name="dateBirthday"></output></td>
                 <td><output name="info"></output></td>
+                    <div id="test"></div>
                 </form>
             </tr>
         </table>

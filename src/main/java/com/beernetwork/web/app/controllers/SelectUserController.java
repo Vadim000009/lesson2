@@ -78,6 +78,7 @@ public class SelectUserController {
     @ApiOperation(value = "Получить данные пользователя")
     @RequestMapping(value = "by/SelectUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> selectUser (@RequestBody UserByIdRequest id) {
+
         User user = UIDAO.getUserFromDB(id.getId());
 
         HttpHeaders headers = new HttpHeaders();
