@@ -67,7 +67,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/select/user")
 public class SelectUserController {
     private final UserInteractionDAO UIDAO;
 
@@ -76,7 +76,7 @@ public class SelectUserController {
     }
 
     @ApiOperation(value = "Получить данные пользователя")
-    @RequestMapping(value = "/com/beernetwork/web/app/controllers/SelectUserController", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "by/SelectUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> selectUser (@RequestBody UserByIdRequest id) {
         User user = UIDAO.getUserFromDB(id.getId());
 

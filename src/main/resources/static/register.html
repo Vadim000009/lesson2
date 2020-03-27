@@ -1,12 +1,12 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang = "ru">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
+    <meta charset="utf-8"/>
     <title>Регистрация</title>
     <script type="text/javascript">
         function createUser() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "api/create/new/user");
+            xhr.open("POST", "api/select/user/by/CreateNew");
             xhr.setRequestHeader("Content-type", "application/json");
 
             var user_fstName = document.getElementById("fstName").value;
@@ -31,9 +31,9 @@
 
     <div id="regForm">
         <form onsubmit="createUser()">
-            <input type="text" id="fstName" placeholder="Имя" required/>
-            <input type="text" id="secName" placeholder="Фамилия" required/>
-            <input type="text" id="patronymic" placeholder="Отчество" required/>
+            <input type="text" id="fstName" placeholder="Имя" required value="asdf"/>
+            <input type="text" id="secName" placeholder="Фамилия" required value="asdf"/>
+            <input type="text" id="patronymic" placeholder="Отчество" required value="asdf"/>
                 <select id="gender" onchange=>
                     <option disabled>Ваш пол</option>
                     <option value="NOGENDER">-</option>
@@ -41,12 +41,12 @@
                     <option value="Female">Женский</option>
                     <option value="Helicopter">AH-64 Apache</option>
                 </select>
-            <input type="date" id="dateBirthday" placeholder="Дата рождения" />
-            <input type="email" id="email" placeholder="Email" required/>
-            <input type="number" id="telephone" placeholder="номер телефона" required/>
-            <input type="password" id="password" placeholder="Пароль" required/>
-            <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" required/>
-            <input type="text" id="info" placeholder="Информация о себе" />
+            <input type="date" id="dateBirthday" placeholder="Дата рождения" value="22.02.2222" />
+            <input type="email" id="email" placeholder="Email" required value="asdf@asdf"/>
+            <input type="number" id="telephone" placeholder="номер телефона" required value="3252352"/>
+            <input type="password" id="password" placeholder="Пароль" required value="assd"/>
+            <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" required value="asdf"/>
+            <input type="text" id="info" placeholder="Информация о себе" value="asdf"/>
             <button type="submit">Отправить</button>
         </form>
     </div>

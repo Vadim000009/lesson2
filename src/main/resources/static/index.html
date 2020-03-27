@@ -4,12 +4,12 @@
     <meta charset="utf-8"/>
     <title>Мой первый сервис</title>
 
-    <link rel="stylesheet" href="../../../../../lesson2/src/main/resources/static/css/mycss.css"/>
+    <link rel="stylesheet" href="css/mycss.css"/>
 
     <script type="text/javascript">
         function getUser() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "api/select/user/by/CreateNew");
+            xhr.open("POST", "api/select/user/by/id");
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.onload = (e) => {
                 alert("Получен ответ" + e.target.response)

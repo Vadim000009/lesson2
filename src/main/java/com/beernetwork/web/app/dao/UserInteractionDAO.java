@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 @Service
 public class UserInteractionDAO implements InitializingBean {
     private Logger log = Logger.getLogger(getClass().getName());
-
-    private static String dbPath = "beer-network.db";    // переименовать
+    private static String dbPath = "wholovebeer.db";
+    private int ID = 0;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -45,9 +45,11 @@ public class UserInteractionDAO implements InitializingBean {
     */
     public User getUserFromDB(int id) {
         if(id == 0) {
-            id--;
+            ID--;
+        } else if (id == 1) {
+            ID++;
         }
-        String query = "select fstName, secName, patronymic, gender, dateBirthday, info from USER where id = " + id;
+        String query = "select fstName, secName, patronymic, gender, dateBirthday, info from USER where ID = " + ID;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(query);
@@ -56,12 +58,11 @@ public class UserInteractionDAO implements InitializingBean {
             user.setSecName(resultSet.getString("SecName"));
             user.setPatronymic(resultSet.getString("patronymic"));
             user.setGender(resultSet.getString("gender"));
-            user.setDateBirthday(resultSet.getDate("birthday"));
+            user.setDateBirthday(resultSet.getDate("dateBirthday"));
             user.setInfo(resultSet.getString("info"));
-            System.out.println(query);
             return user;
         } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос", ex);
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Получение пользователя из БД. Причина:", ex);
             return new User();
         }
     }
@@ -75,6 +76,7 @@ public class UserInteractionDAO implements InitializingBean {
                + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
                user.getDateBirthday() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
                user.getInfo() + "');";
+        System.out.println(query);
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
             Statement stat = conn.createStatement();
             return stat.execute(query);

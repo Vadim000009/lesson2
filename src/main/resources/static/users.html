@@ -1,31 +1,42 @@
-<!DOCTYPE HTML>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
+<html lang = "ru">
 <head>
+    <meta charset="utf-8"/>
     <title>Пользователи</title>
     <script type="text/javascript">
 
         function previousUser() {
             var id = selectUser(0);
         }
+
         function nextUser() {
             var id = selectUser(1);
         }
+
         function selectUser(number) {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "api/create/new/user");
-            var data = {
-                fstName: "",
-                secName: "",
-                patronymic: "",
-                gender: "",
-                info: "",
+            xhr.open("POST", "api/select/user/by/SelectUser");
+            // var data = {
+            //     fstName: "",
+            //     secName: "",
+            //     patronymic: "",
+            //     gender: "",
+            //     info: "",
+            // };
+            xhr.setRequestHeader("Content-type", "application/json");
+            var params = {"id" : number};
+            xhr.send(JSON.stringify(params));
+            xhr.onload = (e) => {
+                var obj = JSON.parse(e.target.response);
+                // alert("Получен ответ" + e.target.response);
+            // var obj = JSON.parse(xhr.getResponseHeader("Content-type", "application/json"));
+            obj.document.getElementById("frsName").innerHTML;
+            obj.document.getElementById("secName").innerHTML;
+            obj.document.getElementById("patronymic").innerHTML;
+            obj.document.getElementById("gender").innerHTML;
+            obj.document.getElementById("info").innerHTML;
+            console.log(this.obj.toString());
             };
-            var obj = JSON.parse(xhr.getResponseHeader("Content-type", "application/json"));
-            document.getElementById("frsName").innerHTML;
-            document.getElementById("secName").innerHTML;
-            document.getElementById("patronymic").innerHTML;
-            document.getElementById("gender").innerHTML;
-            document.getElementById("info").innerHTML;
         }
     </script>
 </head>
@@ -49,7 +60,7 @@
                 </form>
             </tr>
         </table>
-    <form onsubmit="previousUser()"></form><input id="next" type="submit" value="Предыдущий"></form>
+    <form onsubmit="previousUser()"><input id="next" type="submit" value="Предыдущий"></form>
     <form onsubmit="nextUser()"><input id="previous" type="submit" value="Следующий"></form>
 </body>
 </html>
