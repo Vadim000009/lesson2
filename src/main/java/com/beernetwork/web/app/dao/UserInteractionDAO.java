@@ -58,7 +58,7 @@ public class UserInteractionDAO implements InitializingBean {
             user.setSecName(resultSet.getString("SecName"));
             user.setPatronymic(resultSet.getString("patronymic"));
             user.setGender(resultSet.getString("gender"));
-            //user.setDateBirthday(resultSet.getDate("dateBirthday"));
+            user.setDateBirthday(resultSet.getDate("dateBirthday"));
             user.setInfo(resultSet.getString("info"));
             return user;
         } catch (SQLException ex) {
@@ -74,7 +74,7 @@ public class UserInteractionDAO implements InitializingBean {
     public Boolean createNewUser (User user){
         String query = "insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info ) values ('"
                + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
-               user.getDateBirthday() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
+               user.getDateBirthday().getTime() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
                user.getInfo() + "');";
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
             Statement stat = conn.createStatement();
