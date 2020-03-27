@@ -58,7 +58,7 @@ public class UserInteractionDAO implements InitializingBean {
             user.setSecName(resultSet.getString("SecName"));
             user.setPatronymic(resultSet.getString("patronymic"));
             user.setGender(resultSet.getString("gender"));
-//            user.setDateBirthday(resultSet.getDate("dateBirthday"));
+            //user.setDateBirthday(resultSet.getDate("dateBirthday"));
             user.setInfo(resultSet.getString("info"));
             return user;
         } catch (SQLException ex) {

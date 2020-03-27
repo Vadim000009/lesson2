@@ -16,17 +16,26 @@
         function selectUser(number) {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "api/select/user/by/SelectUser");
-             var data = {
-                 fstName: "",
-                 secName: "",
-                 patronymic: "",
-                 gender: "",
-                 dateBirthday: "",
-                 info: "",
-            };
+            //  var data = {
+            //      fstName: "",
+            //      secName: "",
+            //      patronymic: "",
+            //      gender: "",
+            //      dateBirthday: "",
+            //      info: "",
+            // };
             xhr.setRequestHeader("Content-type", "application/json");
             var params = {"id" : number};
             xhr.send(JSON.stringify(params));
+            xhr.onreadystatechange = function() {
+                myObj = JSON.parse(this.responseText);
+                txt += "<table border='1'>"
+                for (x in myObj) {
+                    txt += "<tr><td>" + myObj[x].name + "</td></tr>";
+                }
+                txt += "</table>"
+                document.getElementById("test").innerHTML = txt;
+
             xhr.onload = (e) => {
                 alert("Получен ответ" + e.target.response);
                 obj = JSON.parse(this.obj, data);
