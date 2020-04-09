@@ -13,6 +13,7 @@ public class UserInteractionDAO implements InitializingBean {
     private Logger log = Logger.getLogger(getClass().getName());
     private static String dbPath = "wholovebeer.db";
     private int ID = 0;
+    private int MAXID = 0;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -44,8 +45,13 @@ public class UserInteractionDAO implements InitializingBean {
     * На основе нажатия кнопки, пользователь получает информацию о том или ином пользователе. Шаг всегда +-1.
     */
     public User getUserFromDB(int id) {
+        howManyUsers();
         if(id == 0) {
             ID--;
+            if(ID == -1) {
+                ID = 0;
+                return null;
+            }
         } else if (id == 1) {
             ID++;
         }
@@ -62,8 +68,22 @@ public class UserInteractionDAO implements InitializingBean {
             user.setInfo(resultSet.getString("info"));
             return user;
         } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос. Получение пользователя из БД. Причина:", ex);
-            return new User();
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Получение пользователя из БД.");
+            if (ID >= MAXID) {
+                return null;
+            } else {
+                return getUserFromDB(1);
+            }
+        }
+    }
+
+    private void howManyUsers() {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             Statement stat = conn.createStatement()) {
+            ResultSet resultSet = stat.executeQuery("SELECT max(ID) FROM USER");
+            MAXID = resultSet.getInt(1);
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Получение максимального пользователя. Причина:", ex);
         }
     }
 
@@ -72,6 +92,7 @@ public class UserInteractionDAO implements InitializingBean {
     * На основе запроса вводит данные в БД. Некоторые поля могут быть необязательными. См. register.html
     * */
     public Boolean createNewUser (User user){
+        howManyUsers();
         String query = "insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info ) values ('"
                + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
                user.getDateBirthday().getTime() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +

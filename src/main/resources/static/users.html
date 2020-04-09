@@ -29,14 +29,17 @@
             xhr.send(JSON.stringify(params));
 
             xhr.onload = (e) => {
-                //alert("Получен ответ" + e.target.response);
                 obj = JSON.parse(e.target.response, data);
-                document.getElementById("fstName").innerHTML = obj.fstName;
-                document.getElementById("secName").innerHTML = obj.secName;
-                document.getElementById("patronymic").innerHTML = obj.patronymic;
-                document.getElementById("gender").innerHTML = obj.gender;
-                document.getElementById("dateBirthday").innerHTML = obj.dateBirthday;
-                document.getElementById("info").innerHTML = obj.info;
+                if (obj == null) {
+                    alert("Вы достигли начала");
+                } else {
+                    document.getElementById("fstName").innerHTML = obj.fstName;
+                    document.getElementById("secName").innerHTML = obj.secName;
+                    document.getElementById("patronymic").innerHTML = obj.patronymic;
+                    document.getElementById("gender").innerHTML = obj.gender;
+                    document.getElementById("dateBirthday").innerHTML = obj.dateBirthday;
+                    document.getElementById("info").innerHTML = obj.info;
+                }
             };
         }
     </script>
