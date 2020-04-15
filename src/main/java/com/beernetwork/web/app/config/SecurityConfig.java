@@ -12,6 +12,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable();
+//                .authorizeRequests().anyRequest().authenticated()
+//                .and().httpBasic()
+//                .and().sessionManagement().disable();
         http
                 .authorizeRequests().antMatchers("/**").permitAll()
                 .antMatchers("/").permitAll()
@@ -22,4 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/webjars/springfox-swagger-ui/**").permitAll();
     }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }

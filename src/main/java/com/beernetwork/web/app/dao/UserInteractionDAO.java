@@ -93,13 +93,18 @@ public class UserInteractionDAO implements InitializingBean {
     * */
     public Boolean createNewUser (User user){
         howManyUsers();
-        String query = "insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info ) values ('"
+        String fstName = null, secName = null, patronymic = null, gender = null, email = null, telephone = null, info = null;
+        Date dateBirthday = null;
+
+
+        String query = "insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info) values ('"
                + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
                user.getDateBirthday().getTime() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
                user.getInfo() + "');";
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
             Statement stat = conn.createStatement();
-            return stat.execute(query);
+            stat.execute(query);
+            return true;
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Ошибка выполнения запроса. Вставка в бд. Причина: ", ex);
             return false;
