@@ -2,6 +2,7 @@ package com.beernetwork.web.app.dao;
 
 import com.beernetwork.web.app.model.User;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
@@ -93,17 +94,23 @@ public class UserInteractionDAO implements InitializingBean {
     * */
     public Boolean createNewUser (User user){
         howManyUsers();
-        String fstName = null, secName = null, patronymic = null, gender = null, email = null, telephone = null, info = null;
-        Date dateBirthday = null;
-
-
-        String query = "insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info) values ('"
-               + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
-               user.getDateBirthday().getTime() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
-               user.getInfo() + "');";
+        String fstName = user.getFstName(), secName = user.getSecName(), patronymic = user.getPatronymic(), gender = user.getGender(),
+                email = user.getEmail(), telephone = user.getTelephone(), password = user.getPassword(), info = user.getInfo();
+        long dateBirthday = user.getDateBirthday().getTime();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        StringBuilder query = new StringBuilder();
+        query.append("insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info) values ('")
+                .append(fstName).append("','").append(secName).append("','").append(patronymic).append("','").append(gender)
+                .append("','").append(dateBirthday).append("','").append(email).append("','").append(telephone).append("','")
+                .append(hashedPassword).append("','").append(info).append("');");
+//        query = "insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info) values ('" +
+//               + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
+//               user.getDateBirthday().getTime() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
+//               user.getInfo() + "');";
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
-            Statement stat = conn.createStatement();
-            stat.execute(query);
+            PreparedStatement stat = conn.prepareStatement(String.valueOf(query));
+            stat.execute();
             return true;
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Ошибка выполнения запроса. Вставка в бд. Причина: ", ex);
