@@ -23,7 +23,7 @@
           function validatePassword() {
               var pass2 = document.getElementById("passwordCheck").value;
               var pass1 = document.getElementById("password").value;
-              if (pass1 != pass2)
+              if (pass1 !== pass2)
                   document.getElementById("passwordCheck").setCustomValidity("Пароли не совпадают");
               else
                   document.getElementById("passwordCheck").setCustomValidity('');
