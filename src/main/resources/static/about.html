@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>About Me</title>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/ico" href="static/favicon.ico"/>
+        <link rel = "stylesheet" href = "static/Site_cutaway/css/style-about.css">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> 
+        <style type = "text/css">@import url("css/imagesDynamicUpdate.css");</style>
+        <script>
+            function previousUser() {
+                var id = info(0);
+            }
+
+            function nextUser() {
+                var id = info(1);
+            }
+            function info(number) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "api/select/user/by/SelectUser");
+                var data = {
+                    fstName: "",
+                    secName: "",
+                    patronymic: "",
+                    gender: "",
+                    dateBirthday: "",
+                    info: "",
+                };
+                xhr.setRequestHeader("Content-type", "application/json");
+                var params = {"id" : number};
+                xhr.send(JSON.stringify(params));
+
+                xhr.onload = (e) => {
+                    obj = JSON.parse(e.target.response, data);
+                        document.getElementById("fstName").innerHTML = obj.fstName;
+                        document.getElementById("secName").innerHTML = obj.secName;
+                        document.getElementById("patronymic").innerHTML = obj.patronymic;
+                        document.getElementById("gender").innerHTML = obj.gender;
+                        document.getElementById("dateBirthday").innerHTML = obj.dateBirthday;
+                        document.getElementById("info").innerHTML = obj.info;
+                    };
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="header-center"> 
+                <a href="static/index.html" class="blubtn">Главная</a>
+                <a href="" disabled class="blubtn">Галерея</a>
+                <a href="" disabled class="blubtn">Блог</a>
+            </div>
+        </header>
+        <div class="content">
+            <div id="welcomeHeader">
+                <div class="div-style">
+                    <img src="static/Site_cutaway/images-about/wel1.jpg" class="img-style im-1">
+                    <img src="static/Site_cutaway/images-about/wel2.jpg" class="img-style next im-2">
+                    <img src="static/Site_cutaway/images-about/wel3.jpg" class="img-style next im-3">
+                    <img src="static/Site_cutaway/images-about/wel4.jpg" class="img-style next im-4">
+                </div>
+            </div>
+            <div id="education">
+                <img align="left" src="static/Site_cutaway/images-about/educ.png">
+                <h1>МАИ</h1>
+                <P> Получение высшего в МАИ получилось довольно интересным занятием. В частности оубчение на кафедре
+                    319 "Управление информационной инфраструктурой бизнеса" на 3 факультете МАИ. Ранее кафедра находилась в МАТИ
+                    и называлась "Проектирование Вычислительных Комплексов".</P>
+                <P> На протяжении учёбы участвовал в волонтёрском центре МАИ, студенческих активах, 
+                    профкоме, и конечно же в активной жизни своего вуза.
+                    Благодоря поступлению на эту кафедру теперь могу программировать и писать программы
+                    на разных языках.</P>
+            </div>
+            <div id="reposit">
+                <div class="div-code">
+                    <img align="right" src="static/Site_cutaway/images-about/c.png" class="img-style im-1">
+                    <img align="right" src="static/Site_cutaway/images-about/python.png" class="img-style next im-2">
+                    <img align="right" src="static/Site_cutaway/images-about/java.png" class="img-style next im-3">
+                    <img align="right" src="static/Site_cutaway/images-about/htmlcss.png" class="img-style next im-4">
+                </div>
+                <h1>Репозитории и языки</h1>
+                <p>До поступления в вуз знал (да и сейчас знаю) замечательный язык Python. В процессе обучения в ВУЗе познакомился
+                    с такими языками, как C, C++, Java, Assembly, HTML и CSS.</p>
+                <p>Вполне возможно, что если бы я выполнял работу по верстке сайта через готовые решения, моё знакомство с HTML
+                    и CSS могло бы и не начаться, однако решение писать сайт полностью с нуля позволило мне познать этот язык разметки.
+                    Что касается остальных языков - мои знания в их области всегда можно посмотреть на github (иконка внизу страницы кликабельна).</p>
+            </div>
+            <div id="politic">
+                <a href="#" OnMouseOver="document.getElementById('B_B').src = 'images-about/agit2.png'"
+                   accesskey=""OnMouseOut="document.getElementById('B_B').src = 'images-about/agit1.png'">
+                    <img id="B_B" src="static/Site_cutaway/images-about/agit1.png" align="left"></a>
+                <h1>Политика</h1>
+                <p>Скажем так - о политике громко не заявляю, но если есть возможность противостоять власти, при условии, что это точно
+                    будет работать - я тут как тут.</p>
+                <br>
+                <a href="https://mundep.gudkov.ru/fundraising/team/710">Выдвижение демократов в муниципальные депутаты в Москве | 2017</a>
+                <br>
+                <h2>Газета</h2>
+                <p>За время депутатской компании было выпущенно около 11000 газеты и 16000 листовок, а так же 7000 открыток с приглашением
+                    прийти на выборы. Особый вклад внесла газета. Очень богата была написанна газета. Были напомненны основные проблемы района,
+                    бездействие властей и повсеместно напомненно о том, что нужно не забывать сходить 10 сентября. Автор статьи - Татьяна
+                    Шавшукова. Если бы не она, возможно газета так бы и осталась в планах.</p>
+                <h2>Листовки и открытки</h2>
+                <p>Как уже ранее говорилось, листовок было 16000, а открыток 7000. Они внесли особый вклад. Красивая листовка с фотографией района
+                    и пара слов о себе. И почти точно такие же открытки, за исключением того, что в открытках именно приглашали на выборы. Так же, 
+                    хочется отметить, что открытки разносил я и знакомый. Незабываемое ощущение....</p>
+            </div>
+            <div id = "volont">
+                <a href="https://mosvolonter.ru"> 
+                <img align="right" src="static/Site_cutaway/images-about/volontBook.png"></a>
+                <h1>Волонтёрство</h1>
+                <p>Это что-то на уровне "Я готов в любой момент помочь" и "Если это воскресенье - то меня нет". Имеется волонтёрская книжка и богатый опыт
+                    работы. Так же активный активный волонтёр волонтёрского центра МАИ.</p>
+            </div>
+            <div id="">
+                <h1>Информация о себе</h1>
+                <output name="fstName" id="fstName"></output>
+                <output name="secName" id="secName"></output>
+                <output name="patronymic" id="patronymic"></output>
+                <output name="dateBirthday" id="dateBirthday"></output>
+                <output name="gender" id="gender"></output>
+                <output name="info" id="info"></output>
+                <br>
+                <input id="next" type="submit" value="Предыдущий" onclick="previousUser()">
+                <input id="previous" type="submit" value="Следующий" onclick="nextUser()">
+            </div>
+
+        </div>
+        <div class="footer">
+            <div class="w-container footer-container">
+                <div class="footer-left">&#169; 20!8 Rodionov V. S.</div>
+                <div class="footer-right"> 
+                    <a href="https://www.facebook.com/vadim.rodionov.3">
+                        <i class="icon-facebook-sign" style="font-size:24px;"></i></a> 
+                    <a href="https://github.com/Vadim000009"> 
+                        <i class="icon-github" style="font-size:24px;"></i></a>  
+                    <a href="https://vk.com/pasta_monster"> 
+                        <i class="icon-vk" style="font-size:24px;"></i></a>
+                    <a href="https://www.instagram.com/tuukvadim/">
+                        <i class="icon-instagram" style="font-size:24px;"></i></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

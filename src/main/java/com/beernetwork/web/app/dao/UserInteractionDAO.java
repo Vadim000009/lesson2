@@ -104,10 +104,6 @@ public class UserInteractionDAO implements InitializingBean {
                 .append(fstName).append("','").append(secName).append("','").append(patronymic).append("','").append(gender)
                 .append("','").append(dateBirthday).append("','").append(email).append("','").append(telephone).append("','")
                 .append(hashedPassword).append("','").append(info).append("');");
-//        query = "insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info) values ('" +
-//               + user.getFstName() + "','" + user.getSecName() + "','" + user.getPatronymic() + "','" + user.getGender() + "','" +
-//               user.getDateBirthday().getTime() + "','" + user.getEmail() + "','" + user.getTelephone() + "','" + user.getPassword() + "','" +
-//               user.getInfo() + "');";
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
             PreparedStatement stat = conn.prepareStatement(String.valueOf(query));
             stat.execute();
