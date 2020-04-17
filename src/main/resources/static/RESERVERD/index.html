@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>Мой первый сервис</title>
+
+    <link rel="stylesheet" href="css/mycss.css"/>
+
+    <script type="text/javascript">
+        function getUser() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "api/select/user/by/id");
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onload = (e) => {
+                alert("Получен ответ" + e.target.response)
+            };
+            var user_id = document.getElementById("input_user_id").value;
+            var params = {"id" : user_id};
+            xhr.send(JSON.stringify(params));
+        }
+    </script>
+</head>
+
+<body>
+<div class="wrapper">
+    <form onsubmit="getUser()">
+        <label>
+            Введите id user <input id="input_user_id" type="number" value="">
+        </label><br>
+        <label>
+            Запросить <input type="submit" value="Запросить">
+        </label>
+    </form>
+</div>
+</body>
+</html>

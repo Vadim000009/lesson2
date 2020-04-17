@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang = "ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>Регистрация</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById("password").onchange = validatePassword;
+            document.getElementById("passwordCheck").onchange = validatePassword;
+        }
+        function validatePassword() {
+            var pass2 = document.getElementById("passwordCheck").value;
+            var pass1 = document.getElementById("password").value;
+            if (pass1 != pass2)
+                document.getElementById("passwordCheck").setCustomValidity("Пароли не совпадают");
+            else
+                document.getElementById("passwordCheck").setCustomValidity('');
+        }
+
+
+        function createUser() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "api/select/user/by/CreateNew");
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            var user_fstName = document.getElementById("fstName").value;
+            var user_secName = document.getElementById("secName").value;
+            var user_patronymic = document.getElementById("patronymic").value;
+            var user_gender = document.getElementById("gender").value;
+            var user_dateBirthday = document.getElementById("dateBirthday").value;
+            var user_email = document.getElementById("email").value;
+            var user_telephone = document.getElementById("telephone").value;
+            var user_password = document.getElementById("password").value;
+            var user_info = document.getElementById("info").value;
+
+            var params = {
+                "fstName": user_fstName, "secName": user_secName, "patronymic": user_patronymic,
+                "gender": user_gender, "dateBirthday": user_dateBirthday, "email": user_email,
+                "telephone": user_telephone, "password": user_password, "info": user_info
+            };
+            xhr.send(JSON.stringify(params));
+            xhr.onload = (e) => {
+                if (xhr.status === 200) {
+                    alert("Регистрация прошла успеншно");
+                    document.write(document.location.href = '/home.html', '1000');
+                } else {
+                    alert("Регистрация не удалась, повторите попытку");
+                    document.write(document.location.href = '/register.html', '5000');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Регистрация</h2>
+
+    <div id="regForm">
+        <form onsubmit="createUser()">
+            <input type="text" id="fstName" placeholder="Имя" required maxlength=”50” pattern="^[А-Яа-яЁё\s]+$"/>
+            <input type="text" id="secName" placeholder="Фамилия" required maxlength=”50” pattern="^[А-Яа-яЁё]+$"/>
+            <input type="text" id="patronymic" placeholder="Отчество" maxlength=”50”/>
+                <select id="gender" onchange=>
+                    <option disabled>Ваш пол</option>
+                    <option value="NOGENDER">-</option>
+                    <option value="Male">Мужской</option>
+                    <option value="Female">Женский</option>
+                    <option value="Helicopter">AH-64 Apache</option>
+                </select>
+            <input type="date" id="dateBirthday" placeholder="Дата рождения"/>
+            <input type="email" id="email" placeholder="Email" required maxlength=”150”/>
+            <input type="number" id="telephone" placeholder="номер телефона (только цифры)" required maxlength=”15”/>
+            <input type="password" id="password" placeholder="Пароль" required maxlength=”50” pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*"/>
+            <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" required maxlength=”50”/>
+            <input type="text" id="info" placeholder="Информация о себе"/>
+            <input type="checkbox">Я согласен с правилами сайта и обязаюсь не ругаца матом и не обижать других в интернете</input>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+</body>
+</html>
