@@ -1,14 +1,9 @@
 package com.beernetwork.web.app.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
@@ -21,32 +16,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and().httpBasic()
 //                .and().sessionManagement().disable();
         http
-                .authorizeRequests().antMatchers("/**").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/csrf").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/swagger-ui.html/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
-                .antMatchers("/messanges.html").hasRole("USER")
-                .antMatchers("/users.html").hasRole("USER")
-                .antMatchers("/adminPage.htnl").hasRole("ADMIN")
-                .antMatchers().authenticated()
+                .authorizeRequests()
+                .antMatchers("/v2/api-docs").hasRole("ADMIN")
+                .antMatchers("/swagger-ui.html").hasRole("ADMIN")
+                .antMatchers("/swagger-ui.html/**").hasRole("ADMIN")
+                .antMatchers("/swagger-resources/**").hasRole("ADMIN")
+                .antMatchers("/webjars/springfox-swagger-ui/**").hasRole("ADMIN")
+                .antMatchers("/adminPage.html").hasRole("ADMIN")
+                .antMatchers("/index.html").permitAll()
+                .antMatchers("/beermap.html").permitAll()
+                .antMatchers("/news.html").permitAll()
+                .antMatchers("/register.html").permitAll()
+                .antMatchers("/about.html").permitAll()
+                .antMatchers("/api/select/user/by/CreateNew").permitAll()
+                .antMatchers("/api/select/user/by/CreateNew").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/messanges.html").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/users.html").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/myprofile.html").hasAnyRole("USER", "ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/messages.html");
+                .loginPage("/login.html").permitAll()
+                .loginProcessingUrl("/login").permitAll()
+                .defaultSuccessUrl("/messages.html",true);
 
-    }
-
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
-                .username("email")
-                .password("password")
-                .roles("USER")
-                .build();
-        return  new InMemoryUserDetailsManager();
     }
 }

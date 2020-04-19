@@ -1,5 +1,6 @@
 package com.beernetwork.web.app.dao;
 
+import com.beernetwork.web.app.api.request.UserByEmailRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthorizationDAO implements UserDetailsService {
     private final UserInteractionDAO userInteractionDAO;
 
@@ -16,15 +19,15 @@ public class AuthorizationDAO implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
-        web.app.model.User credential = UserInteractionDAO.selectEmail(email);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        com.beernetwork.web.app.model.AuthorizationUser userFromDb = UserByEmailRequest.selectUserByEmail(email);
 
-        UserDetails user = User
-                .withUsername(credential.getEmail())
-                .password(credential.getPassword())
-                .roles(credential.getRole())
+        UserDetails userDetails = User
+                .withUsername(userFromDb.getEmail())
+                .password(userFromDb.getPassword())
+                .roles(userFromDb.getRole())
                 .build();
-        return user;
+        return userDetails;
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
