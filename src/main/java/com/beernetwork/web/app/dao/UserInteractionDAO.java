@@ -1,6 +1,10 @@
 package com.beernetwork.web.app.dao;
 
+import com.beernetwork.web.app.api.request.UserChangeInfoRequest;
+import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
+import com.beernetwork.web.app.api.request.UserChangePhotoRequest;
 import com.beernetwork.web.app.model.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -67,6 +71,7 @@ public class UserInteractionDAO implements InitializingBean {
             user.setGender(resultSet.getString("gender"));
             user.setDateBirthday(resultSet.getDate("dateBirthday"));
             user.setInfo(resultSet.getString("info"));
+            // Добавить информацию про фото. Если нет, то pizdos.jpg
             return user;
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Не удалось выполнить запрос. Получение пользователя из БД.");
@@ -110,6 +115,45 @@ public class UserInteractionDAO implements InitializingBean {
             return true;
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Ошибка выполнения запроса. Вставка в бд. Причина: ", ex);
+            return false;
+        }
+    }
+
+    public Boolean changePhotoUser (@NotNull UserChangePhotoRequest userChangePhotoRequest) {
+        StringBuilder queryPhoto = new StringBuilder();
+        queryPhoto.append("UPDATE USER set photo=").append(userChangePhotoRequest.getUrlPic()).append("where id =").append(userChangePhotoRequest.getId());
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPhoto))) {
+            stat.execute();
+            return true;
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
+            return false;
+        }
+    }
+
+    public Boolean changeInfoUser (@NotNull UserChangeInfoRequest userChangeInfoRequest) {
+        StringBuilder queryInfo = new StringBuilder();
+        queryInfo.append("UPDATE USER set info=").append(userChangeInfoRequest.getInfo()).append("where id =").append(userChangeInfoRequest.getId());
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryInfo))) {
+            stat.execute();
+            return true;
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
+            return false;
+        }
+    }
+
+    public Boolean changePasswordUser (@NotNull UserChangePasswordRequest userChangePasswordRequest) {
+        StringBuilder queryPassword = new StringBuilder();
+        queryPassword.append("UPDATE USER set password=").append(userChangePasswordRequest.getPassword()).append("where id =").append(userChangePasswordRequest.getId());
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPassword))) {
+            stat.execute();
+            return true;
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
             return false;
         }
     }
