@@ -68,10 +68,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/select/user")
-public class SelectUserController {
+public class UserController {
     private final UserInteractionDAO UIDAO;
 
-    public SelectUserController(UserInteractionDAO UIDao) {
+    public UserController(UserInteractionDAO UIDao) {
         this.UIDAO = UIDao;
     }
 
@@ -84,5 +84,16 @@ public class SelectUserController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(user, headers, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Создание нового User")
+    @RequestMapping(value = "by/CreateNew", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> createNewUser (@RequestBody User user) {
+
+        Boolean bool = UIDAO.createNewUser(user);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
 }

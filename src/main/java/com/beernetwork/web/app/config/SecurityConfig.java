@@ -12,9 +12,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable();
-//                .authorizeRequests().anyRequest().authenticated()
-//                .and().httpBasic()
-//                .and().sessionManagement().disable();
         http
                 .authorizeRequests()
                 .antMatchers("/v2/api-docs").hasRole("ADMIN")
@@ -23,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-resources/**").hasRole("ADMIN")
                 .antMatchers("/webjars/springfox-swagger-ui/**").hasRole("ADMIN")
                 .antMatchers("/adminPage.html").hasRole("ADMIN")
+                .antMatchers("//api/select/admin/**").hasRole("ADMIN")
                 .antMatchers("/index.html").permitAll()
                 .antMatchers("/beermap.html").permitAll()
                 .antMatchers("/news.html").permitAll()
