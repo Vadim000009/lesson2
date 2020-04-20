@@ -157,5 +157,8 @@ public class UserInteractionDAO implements InitializingBean {
             return false;
         }
     }
+
+    //Если пользователь зашёл на страницу с сообщениями - загрузить все
+    //Если пользователь нажал на отправить - кинут ьв сообщения и создать таблицу
 }
 
