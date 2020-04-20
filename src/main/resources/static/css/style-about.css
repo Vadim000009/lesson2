@@ -1,7 +1,7 @@
 header {
     height: 50px;
     background-color: wheat;
-    background: url(/Site_cutaway/images-about/bottom.png) repeat;
+    background: url(images-about/bottom.png) repeat;
     float: none;
 }
 
@@ -49,7 +49,7 @@ a.blubtn:active {
     color: #000;
     padding-top: 1px;
     height: 350px;
-    background: url(/Site_cutaway/images-about/education.jpg) repeat;
+    background: url(images-about/education.jpg) repeat;
 }
 
 #reposit {
@@ -57,7 +57,7 @@ a.blubtn:active {
     padding-top: 20px;
     padding-bottom: 20px;
     height: 350px;
-    background: url(/Site_cutaway/images-about/code.jpg) no-repeat;
+    background: url(images-about/code.jpg) no-repeat;
     background-size: cover;
 }
 
@@ -67,7 +67,7 @@ a.blubtn:active {
     width: 100%;
     height: 400px;
     color: black;
-    background: url(/Site_cutaway/images-about/politic1.jpg) no-repeat;
+    background: url(images-about/politic1.jpg) no-repeat;
     background-size: cover;
 }
 
@@ -76,7 +76,7 @@ a.blubtn:active {
     padding-top: 10px;
     padding-bottom: 35px;
     height: 300px;
-    background: url(/Site_cutaway/images-about/volont.jpg) repeat;
+    background: url(images-about/volont.jpg) repeat;
 }
 
 .footer {
