@@ -1,12 +1,10 @@
 package com.beernetwork.web.app.dao;
 
+import com.beernetwork.web.app.api.request.UserByIdRequest;
 import com.beernetwork.web.app.model.NewsPost;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static com.beernetwork.web.app.dao.UserInteractionDAO.dbPath;
 //import static com.beernetwork.web.app.dao.UserInteractionDAO.log;
@@ -35,10 +33,23 @@ public class AdministrationDAO {
             return false;
         }
     }
+    public UserByIdRequest findUserInDB(String email) {
+        StringBuilder queryFind = new StringBuilder();
+        queryFind.append("delete from USER where id = ").append(email);
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath); Statement stat = conn.createStatement()) {
+            ResultSet resultSet = stat.executeQuery(String.valueOf(queryFind));
+            UserByIdRequest userByIdRequest = new UserByIdRequest();
+            userByIdRequest.setId(resultSet.getInt("id"));
+            return userByIdRequest;
+        } catch (SQLException ex) {
+//            log.log(Level.WARNING, "Не удалось выполнить запрос. Поиск пользователя в БД. Причина: ", ex);
+            return new UserByIdRequest();
+        }
+    }
 
     public boolean createNews(NewsPost newsPost) {
         String nameOfNews = newsPost.getNameOfNews(), textNews = newsPost.getTextNews();
-        long datePosting = newsPost.getDatePosting().getTime();
+        long datePosting = System.currentTimeMillis();
         StringBuilder queryNews = new StringBuilder();
         queryNews.append("insert into newsOnSite (nameOfNews, textNews, datePosting) values ('").append(nameOfNews).append("','")
         .append(textNews).append("','").append(datePosting).append("');");

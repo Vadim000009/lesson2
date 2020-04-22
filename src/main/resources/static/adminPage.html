@@ -6,6 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Администратор | Beer Network</title>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+    <script type="text/javascript">
+        function deleteUser() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "api/select/admin/delete/User");
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            var admin_deleteUser = document.getElementById("deleteUser").value;
+            var params = {"id": admin_deleteUser};
+            xhr.send(JSON.stringify(params));
+            if (xhr.onload.prototype.status === XMLHttpRequest.DONE) {
+                alert("Пользователь удалён");
+            } else {
+                alert("Неудача! Проверьте id или обратитесь к системному администратору.");
+            }
+        }
+        function findUser() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "api/select/admin/find/User");
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            var admin_findUser = document.getElementById("findUser").value;
+            var params = {"email": admin_findUser};
+            xhr.send(JSON.stringify(params));
+            xhr.onload = (e) => {
+                if (e === null) {
+                    alert("Пользователь с таким Email'ом не найден!")
+                } else {
+                    alert("Получен ответ! id пользователя: " + e.target.response)
+                }
+            };
+        }
+        function createNewNews() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "api/select/admin/create/news");
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            var admin_createArticle = document.getElementById("createArticle").value;
+            var admin_createText = document.getElementById("createText").value;
+            var params = {"article": admin_createArticle, "textNews": admin_createText};
+            xhr.send(JSON.stringify(params));
+            if (xhr.onload.prototype.status === XMLHttpRequest.DONE) {
+                alert("Новость создана!");
+            } else {
+                alert("Неудача! Обратитесь к системному администратору.");
+            }
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light"><a class="navbar-brand" href="index.html">Beer Network</a>
@@ -43,8 +90,31 @@
                     <div class="text-center col-12">
                         <h2>Страница Администратора</h2>
                     </div>
-                    <div class="form-group" align="center">
-                        <p>\о</p>
+                    <div class="form-group">
+                        <form onsubmit="deleteUser()" name="del">
+                            <div class="form-deleteUser">
+                                <label for="deleteUser">Введите id юзверя</label>
+                                <input type="number" required class="form-control" id="deleteUser" name="deleteUser" placeholder="id" pattern="^[0-9]+$">
+                                <button type="submit" id="deleteUserSubmit" class="btn btn-primary btn-lg">Отправить</button>
+                            </div>
+                        </form>
+                        <form onsubmit="findUser()" name="find">
+                            <div class="form-findByEmail">
+                                <label for="findByEmail">Введите email юзверя для поиска в БД</label>
+                                <input type="email" required class="form-control" id="findByEmail" name="findByEmail" placeholder="id" pattern="^[0-9]+$">
+                                <button type="submit" id="findByEmailSubmit" class="btn btn-primary btn-lg">Отправить</button>
+                            </div>
+                        </form>
+                        <form onsubmit="createNewNews()" name="newNews">
+                            <div class="form-createNews">
+                                <label>Публикация новостей</label>
+                                <label for="createArticle">Заголовок</label>
+                                <input type="text" required class="form-control" id="createArticle" name="createArticle" placeholder="Заголовок">
+                                <label for="createText">Информационная составляющая</label>
+                                <textarea rows="10" cols="100" class="form-control" id="createText" name="createText" placeholder="Ждём информации" aria-describedby="messageHelp"></textarea>
+                                <button type="submit" id="createNewsSubmit" class="btn btn-primary btn-lg">Отправить</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
