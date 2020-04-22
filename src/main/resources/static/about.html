@@ -115,12 +115,21 @@
             </div>
             <div id="">
                 <h1>Информация о себе</h1>
-                <output name="fstName" id="fstName"></output>
-                <output name="secName" id="secName"></output>
-                <output name="patronymic" id="patronymic"></output>
-                <output name="dateBirthday" id="dateBirthday"></output>
-                <output name="gender" id="gender"></output>
-                <output name="info" id="info"></output>
+                <table>
+                    <tr>
+                        <td rowspan="3"></td>
+                        <td><output name="fstName" id="fstName"></output></td>
+                        <td><output name="secName" id="secName"></output></td>
+                        <td><output name="patronymic" id="patronymic"></output></td>
+                    </tr>
+                    <tr>
+                        <td><output name="dateBirthday" id="dateBirthday"></output></td>
+                        <td colspan="2"><output name="gender" id="gender"></output></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><output name="info" id="info"></output></td>
+                    </tr>
+                </table>
                 <br>
                 <input id="next" type="submit" value="Предыдущий" onclick="previousUser()">
                 <input id="previous" type="submit" value="Следующий" onclick="nextUser()">
