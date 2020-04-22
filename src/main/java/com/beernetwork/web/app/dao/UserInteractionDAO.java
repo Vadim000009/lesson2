@@ -6,6 +6,9 @@ import com.beernetwork.web.app.api.request.UserChangePhotoRequest;
 import com.beernetwork.web.app.model.User;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,9 @@ public class UserInteractionDAO implements InitializingBean {
     public static String dbPath = "wholovebeer.db";
     private int ID = 0;
     private int MAXID = 0;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -105,6 +111,8 @@ public class UserInteractionDAO implements InitializingBean {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
         StringBuilder query = new StringBuilder();
+        System.out.println(email);
+        sendEmail(email);
         query.append("insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info) values ('")
                 .append(fstName).append("','").append(secName).append("','").append(patronymic).append("','").append(gender)
                 .append("','").append(dateBirthday).append("','").append(email).append("','").append(telephone).append("','")
@@ -156,6 +164,15 @@ public class UserInteractionDAO implements InitializingBean {
             log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
             return false;
         }
+    }
+
+    public void sendEmail(String emailRegisteredNow) {
+        System.out.println(emailRegisteredNow);
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(emailRegisteredNow);
+        msg.setSubject("Добро пожаловать. Снова");
+        msg.setText("Не будь лапшой\n Бухай побольше");
+        javaMailSender.send(msg);
     }
 
     //Если пользователь зашёл на страницу с сообщениями - загрузить все

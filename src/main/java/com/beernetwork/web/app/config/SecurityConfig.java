@@ -40,13 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .formLogin()
 //                .loginPage("/login.html").permitAll()
 //                .loginProcessingUrl("/login").permitAll()
-//                .defaultSuccessUrl("/messages.html",true);
+//                .defaultSuccessUrl("/chat.html",true);
                 .authorizeRequests()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-ui.html/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/webjars/springfox-swagger-ui/**").permitAll();
+                .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
+                .antMatchers("/**").hasAnyRole("USER", "ADMIN")
+                .and()
+                .formLogin();
+//                .loginPage("/login.html").permitAll()
+//                .loginProcessingUrl("/login").permitAll()
+//                .defaultSuccessUrl("/chat.html",true);;
 
     }
 }

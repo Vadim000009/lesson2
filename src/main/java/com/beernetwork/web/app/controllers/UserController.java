@@ -133,5 +133,16 @@ public class UserController {
         return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
 
+//    @ApiOperation(value = "Пользователь нажимает написать сообщение")
+//    @RequestMapping(value = "by/CreateNewDialog", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Boolean> createNewDialog (@RequestBody UserByIdRequest userByIdRequest) {
+//
+//        Boolean bool = MDAO.createNewDialog(userByIdRequest);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
+//    }
+
 
 }
