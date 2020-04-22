@@ -170,8 +170,8 @@ public class UserInteractionDAO implements InitializingBean {
         System.out.println(emailRegisteredNow);
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(emailRegisteredNow);
-        msg.setSubject("Добро пожаловать. Снова");
-        msg.setText("Не будь лапшой\n Бухай побольше");
+        msg.setSubject("Добро пожаловать. Снова.");
+        msg.setText("Прздравляю тебя с успешной регистрацией на этом сайте.\nНе забудь почитать новости и накинуть певка перед заходои на сайт :)");
         javaMailSender.send(msg);
     }
 
