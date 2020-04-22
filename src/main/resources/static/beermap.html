@@ -5,7 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Собутыльники | Beer Network</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=8bd454d6-86f9-42be-a031-5c087c705f94&lang=ru_RU" type="text/javascript"></script>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        // Функция ymaps.ready() будет вызвана, когда
+        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+        function init(){
+            // Создание карты.
+            var myMap = new ymaps.Map("map", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [55.76, 37.64],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 7
+            });
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light"><a class="navbar-brand" href="index.html">Beer Network</a>
@@ -43,9 +63,7 @@
                     <div class="text-center col-12">
                         <h2>Карта пивных</h2>
                     </div>
-                    <div class="form-group" align="center">
-                        <p>Здесь будет карта</p>
-                    </div>
+                        <div id="map" class="map"></div>
                 </div>
             </div>
         </div>

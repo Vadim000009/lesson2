@@ -569,6 +569,15 @@ pre code {
   margin-left: auto;
 }
 
+.map {
+  width: 600px;
+  height: 400px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
