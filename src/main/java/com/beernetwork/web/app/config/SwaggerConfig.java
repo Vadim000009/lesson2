@@ -29,9 +29,9 @@ public class SwaggerConfig {
 
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
-                .title("Micro soft service")
-                .description("Хачу на пары. Самоизоляция зло. А мог бы написать диплом без слов 'утопить бы тебя в реке'")
-                .version("0.2.1.3")
+                .title("Micro soft service aka 'Beer Network' by Rodionov V. S.")
+                .description("Приятный микро сервис смягкими ограничениями. Не 2ch конечно,\n но отличная сеть для общения русско говорящего населения о пивке")
+                .version("Beta 0.8")
                 .build();
     }
 }

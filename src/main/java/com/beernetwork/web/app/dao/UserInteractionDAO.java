@@ -1,5 +1,6 @@
 package com.beernetwork.web.app.dao;
 
+import com.beernetwork.web.app.api.request.UserByIdRequest;
 import com.beernetwork.web.app.api.request.UserChangeInfoRequest;
 import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
 import com.beernetwork.web.app.api.request.UserChangePhotoRequest;
@@ -153,9 +154,22 @@ public class UserInteractionDAO implements InitializingBean {
         }
     }
 
-    public Boolean changePasswordUser (@NotNull UserChangePasswordRequest userChangePasswordRequest) {
+    public Boolean changePasswordUser (@NotNull UserChangePasswordRequest userChangePasswordRequest, String username) {
         StringBuilder queryPassword = new StringBuilder();
-        queryPassword.append("UPDATE USER set password=").append(userChangePasswordRequest.getPassword()).append("where id =").append(userChangePasswordRequest.getId());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(userChangePasswordRequest.getPassword());
+        StringBuilder queryFind = new StringBuilder();
+        queryFind.append("select * from USER where email = ").append(username);
+        UserByIdRequest userByIdRequest = new UserByIdRequest();
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryFind))) {
+            ResultSet resultSet = stat.executeQuery();
+            userByIdRequest.setId(resultSet.getInt("id"));
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Получение ID пользователя. Причина:" + ex);
+            return false;
+        }
+        queryPassword.append("UPDATE USER set password=").append(hashedPassword).append("where id =").append(userByIdRequest.getId());
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPassword))) {
             stat.execute();

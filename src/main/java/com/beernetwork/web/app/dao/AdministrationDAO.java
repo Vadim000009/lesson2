@@ -35,7 +35,7 @@ public class AdministrationDAO {
     }
     public UserByIdRequest findUserInDB(String email) {
         StringBuilder queryFind = new StringBuilder();
-        queryFind.append("delete from USER where id = ").append(email);
+        queryFind.append("select * from USER where email = ").append(email);
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath); Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(String.valueOf(queryFind));
             UserByIdRequest userByIdRequest = new UserByIdRequest();

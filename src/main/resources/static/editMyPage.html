@@ -7,7 +7,19 @@
     <title>Администратор | Beer Network</title>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <script type="text/javascript">
-        function deleteUser() {
+        window.onload = function () {
+            document.getElementById("password").onchange = validatePassword;
+            document.getElementById("passwordCheck").onchange = validatePassword;
+        }
+
+        function change() {
+            if(document.getElementById("checkbox").checked) {
+                document.getElementById("registrationSubmit").disabled = false;
+            } else{
+                document.getElementById("registrationSubmit").disabled = true
+            }
+        }
+        function updatePhoto() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "api/select/admin/delete/User");
             xhr.setRequestHeader("Content-type", "application/json");
@@ -21,35 +33,34 @@
                 alert("Неудача! Проверьте id или обратитесь к системному администратору.");
             }
         }
-        function findUser() {
+        function updatePassword() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "api/select/admin/find/User");
+            xhr.open("POST", "api/select/user/change/password");
             xhr.setRequestHeader("Content-type", "application/json");
 
-            var admin_findUser = document.getElementById("findUser").value;
-            var params = {"email": admin_findUser};
+            var user_password = document.getElementById("password").value;
+            var params = {"password": user_password};
             xhr.send(JSON.stringify(params));
             xhr.onload = (e) => {
                 if (e === null) {
-                    alert("Пользователь с таким Email'ом не найден!")
+                    alert("Неудача! Свяжитесь с администрацией")
                 } else {
-                    alert("Получен ответ! id пользователя: " + e.target.response)
+                    alert("Пароль изменён")
                 }
             };
         }
-        function createNewNews() {
+        function updateInfo() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "api/select/admin/create/news");
+            xhr.open("POST", "api/select/user/change/info");
             xhr.setRequestHeader("Content-type", "application/json");
 
-            var admin_createArticle = document.getElementById("createArticle").value;
-            var admin_createText = document.getElementById("createText").value;
-            var params = {"article": admin_createArticle, "textNews": admin_createText};
+            var user_info = document.getElementById("info").value;
+            var params = {"info": user_info};
             xhr.send(JSON.stringify(params));
             if (xhr.onload.prototype.status === XMLHttpRequest.DONE) {
-                alert("Новость создана!");
+                alert("Информация обновлена!");
             } else {
-                alert("Неудача! Обратитесь к системному администратору.");
+                alert("Неудача! Свяжитесь с администрацией");
             }
         }
     </script>
@@ -93,28 +104,29 @@
                         <h2>Страница Администратора</h2>
                     </div>
                     <div class="form-group">
-                        <form onsubmit="deleteUser()" name="del">
-                            <div class="form-deleteUser">
-                                <label for="deleteUser">Введите id юзверя</label>
-                                <input type="number" required class="form-control" id="deleteUser" name="deleteUser" placeholder="id" pattern="^[0-9]+$" >
-                                <button type="submit" id="deleteUserSubmit" class="btn btn-primary btn-lg">Отправить</button>
+                        <form onsubmit="updatePhoto()" name="updatePhoto">
+                            <div class="form-updatePhoto">
+                                <label for="updatePhoto">Введите id юзверя</label>
+                                <input type="number" required class="form-control" id="updatePhoto" name="updatePhoto">
+                                <button type="submit" id="updatePhotoSubmit" class="btn btn-primary btn-lg">Отправить</button>
                             </div>
                         </form>
-                        <form onsubmit="findUser()" name="find">
-                            <div class="form-findByEmail">
-                                <label for="findByEmail">Введите email юзверя для поиска в БД</label>
-                                <input type="email" required class="form-control" id="findByEmail" name="findByEmail" placeholder="id" pattern="^[0-9]+$">
-                                <button type="submit" id="findByEmailSubmit" class="btn btn-primary btn-lg">Отправить</button>
+                        <form onsubmit="updatePassword()" name="updatePassword">
+                            <div class="form-group">
+                                <label for="password">Пароль<br>Пароль должен быть:<br>больше 8 символов<br>иметь строчные и заглавные буквы<br>иметь хотя бы одну цифру</label>
+                                <p> <input class="form-control" type="password" id="password" required maxlength="50" name="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Подтвердите пароль</label>
+                                <p><input class="form-control" type="password" id="passwordCheck" required maxlength="50" name="passwordCheck" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*"></p>
+                                <button type="submit" id="updatePasswordSubmit" class="btn btn-primary btn-lg">Отправить</button>
                             </div>
                         </form>
-                        <form onsubmit="createNewNews()" name="newNews">
-                            <div class="form-createNews">
-                                <label>Публикация новостей</label>
-                                <label for="createArticle">Заголовок</label>
-                                <input type="text" required class="form-control" id="createArticle" name="createArticle" placeholder="Заголовок">
-                                <label for="createText">Информационная составляющая</label>
-                                <textarea rows="10" cols="100" class="form-control" id="createText" name="createText" placeholder="Ждём информации" aria-describedby="messageHelp"></textarea>
-                                <button type="submit" id="createNewsSubmit" class="btn btn-primary btn-lg">Отправить</button>
+                        <form onsubmit="updateInfo()" name="updateInfo">
+                            <div class="form-updateInfo">
+                                    <label for="updateInfo">Информация о себе</label>
+                                    <textarea rows="10" cols="100" class="form-control" id="updateInfo" name="updateInfo" placeholder="Напишите информацию о себе" aria-describedby="info"></textarea>
+                                <button type="submit" id="updateInfoSubmit" class="btn btn-primary btn-lg">Отправить</button>
                             </div>
                         </form>
                     </div>

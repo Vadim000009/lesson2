@@ -69,6 +69,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping(value = "/api/select/user")
 public class UserController {
@@ -124,25 +126,13 @@ public class UserController {
 
     @ApiOperation(value = "Пользователь редактирует свой пароль")
     @RequestMapping(value = "change/password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changePasswordUser (@RequestBody UserChangePasswordRequest userChangePasswordRequest) {
-
-        Boolean bool = UIDAO.changePasswordUser(userChangePasswordRequest);
+    public ResponseEntity<Boolean> changePasswordUser (@RequestBody UserChangePasswordRequest userChangePasswordRequest, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("username");
+        Boolean bool = UIDAO.changePasswordUser(userChangePasswordRequest, username);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
-
-//    @ApiOperation(value = "Пользователь нажимает написать сообщение")
-//    @RequestMapping(value = "by/CreateNewDialog", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Boolean> createNewDialog (@RequestBody UserByIdRequest userByIdRequest) {
-//
-//        Boolean bool = MDAO.createNewDialog(userByIdRequest);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
-//    }
-
 
 }
