@@ -6,6 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Новости | Beer Network</title>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+    <script type="text/javascript">
+
+        function previousUser() {
+            var id = selectUser(0);
+        }
+
+        function nextUser() {
+            var id = selectUser(1);
+        }
+
+        function selectUser(number) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "api/select/user/get/news");
+            var data = {
+                article: "",
+                textNews: "",
+                datePosting: ""
+            };
+            xhr.setRequestHeader("Content-type", "application/json");
+            var params = {"id" : number};
+            xhr.send(JSON.stringify(params));
+
+            xhr.onload = (e) => {
+                obj = JSON.parse(e.target.response, data);
+                if (obj === null) {
+                    alert("Вы достигли начала");
+                } else {
+                    document.getElementById("article").innerHTML = obj.article;
+                    document.getElementById("textNews").innerHTML = obj.textNews;
+                    document.getElementById("datePosting").innerHTML = obj.datePosting;
+                }
+            };
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light"><a class="navbar-brand" href="index.html">Beer Network</a>
@@ -45,8 +79,20 @@
                     <div class="text-center col-12">
                         <h2>Свежие сводки с хмельных полей</h2>
                     </div>
-                    <div class="form-group" align="center">
-                        <p>Здесь будут новости</p>
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td><output name="article" id="article"></output></td>
+                            </tr>
+                            <tr>
+                                <td><output name="textNews" id="textNews"></output></td>
+                            </tr>
+                            <tr>
+                                <td><output name="datePosting" id="datePosting"></output></td>
+                            </tr>
+                        </table>
+                        <input id="next" type="submit" value="Предыдущая новость" onclick="previousUser()">
+                        <input id="previous" type="submit" value="Следующая новость" onclick="nextUser()">
                     </div>
                 </div>
             </div>

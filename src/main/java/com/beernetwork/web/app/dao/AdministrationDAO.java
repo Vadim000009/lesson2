@@ -48,7 +48,7 @@ public class AdministrationDAO {
     }
 
     public boolean createNews(NewsPost newsPost) {
-        String nameOfNews = newsPost.getNameOfNews(), textNews = newsPost.getTextNews();
+        String nameOfNews = newsPost.getArticle(), textNews = newsPost.getTextNews();
         long datePosting = System.currentTimeMillis();
         StringBuilder queryNews = new StringBuilder();
         queryNews.append("insert into newsOnSite (nameOfNews, textNews, datePosting) values ('").append(nameOfNews).append("','")
