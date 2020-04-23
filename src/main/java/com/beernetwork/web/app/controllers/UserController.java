@@ -53,10 +53,7 @@
 //}
 package com.beernetwork.web.app.controllers;
 
-import com.beernetwork.web.app.api.request.UserByIdRequest;
-import com.beernetwork.web.app.api.request.UserChangeInfoRequest;
-import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
-import com.beernetwork.web.app.api.request.UserChangePhotoRequest;
+import com.beernetwork.web.app.api.request.*;
 import com.beernetwork.web.app.dao.UserInteractionDAO;
 import com.beernetwork.web.app.model.User;
 import io.swagger.annotations.ApiOperation;
@@ -135,4 +132,14 @@ public class UserController {
         return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Регистрируемый пользователь проверяет свою почту в базе")
+    @RequestMapping(value = "check/email", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> checkEmail (@RequestBody AdminSearchUserByEmailRequest email) {
+
+        Boolean bool = UIDAO.checkEmailUsers(email.getEmail());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
+    }
 }

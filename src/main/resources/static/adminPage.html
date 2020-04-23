@@ -9,7 +9,7 @@
     <script type="text/javascript">
         function deleteUser() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "api/select/admin/delete/User");
+            xhr.open("POST", "api/select/admin/delete/user");
             xhr.setRequestHeader("Content-type", "application/json");
 
             var admin_deleteUser = document.getElementById("deleteUser").value;
@@ -23,7 +23,7 @@
         }
         function findUser() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "api/select/admin/find/User");
+            xhr.open("POST", "api/select/admin/search/user");
             xhr.setRequestHeader("Content-type", "application/json");
 
             var admin_findUser = document.getElementById("findUser").value;

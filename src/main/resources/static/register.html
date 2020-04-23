@@ -10,6 +10,7 @@
           window.onload = function () {
               document.getElementById("password").onchange = validatePassword;
               document.getElementById("passwordCheck").onchange = validatePassword;
+              document.getElementById("email").onchange = validateEmail;
           }
 
           function change() {
@@ -17,6 +18,21 @@
               document.getElementById("registrationSubmit").disabled = false;
             } else{
               document.getElementById("registrationSubmit").disabled = true
+            }
+          }
+
+          function validateEmail() {
+            var email_entered = document.getElementById("email").value;
+            xhr.open("POST", "api/select/user/check/email");
+            xhr.setRequestHeader("Content-type", "application/json");
+            var params = {"email": email_entered};
+            xhr.send(JSON.stringify(params));
+            if (xhr.onload.prototype.status === XMLHttpRequest.DONE) {
+              document.getElementById("passwordCheck").setCustomValidity('Емейл свободен');
+              document.getElementById("registrationSubmit").required = false;
+            } else {
+              document.getElementById("email").setCustomValidity("Данный емейл уже занят");
+              document.getElementById("registrationSubmit").required = true;
             }
           }
 

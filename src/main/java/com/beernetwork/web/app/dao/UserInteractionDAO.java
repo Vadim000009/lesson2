@@ -189,6 +189,23 @@ public class UserInteractionDAO implements InitializingBean {
         javaMailSender.send(msg);
     }
 
+    public Boolean checkEmailUsers(String email) {
+        String emailToCheck = email;
+        StringBuilder queryFind = new StringBuilder();
+        queryFind.append("select email from USER where email = '").append(email).append("'");
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath); Statement stat = conn.createStatement()) {
+            ResultSet resultSet = stat.executeQuery(String.valueOf(queryFind));
+            if (emailToCheck.equals(resultSet.getString("email"))) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Поиск пользователя в БД. Причина: ", ex);
+            return false;
+        }
+    }
+
     //Если пользователь зашёл на страницу с сообщениями - загрузить все
     //Если пользователь нажал на отправить - кинут ьв сообщения и создать таблицу
 }
