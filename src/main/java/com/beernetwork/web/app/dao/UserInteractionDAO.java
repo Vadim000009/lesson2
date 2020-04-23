@@ -1,7 +1,6 @@
 package com.beernetwork.web.app.dao;
 
 import com.beernetwork.web.app.api.request.UserByIdRequest;
-import com.beernetwork.web.app.api.request.UserChangeInfoRequest;
 import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
 import com.beernetwork.web.app.api.request.UserChangePhotoRequest;
 import com.beernetwork.web.app.model.User;
@@ -141,9 +140,9 @@ public class UserInteractionDAO implements InitializingBean {
         }
     }
 
-    public Boolean changeInfoUser (@NotNull UserChangeInfoRequest userChangeInfoRequest) {
+    public Boolean changeInfoUser (String email, String text) {
         StringBuilder queryInfo = new StringBuilder();
-        queryInfo.append("UPDATE USER set info=").append(userChangeInfoRequest.getInfo()).append("where id =").append(userChangeInfoRequest.getId());
+        queryInfo.append("UPDATE USER set info=").append(text).append("where email ='").append(email).append("'");
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              PreparedStatement stat = conn.prepareStatement(String.valueOf(queryInfo))) {
             stat.execute();

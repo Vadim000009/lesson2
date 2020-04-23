@@ -44,7 +44,7 @@ public class AdministrationDAO {
     }
     public UserByIdRequest findUserInDBByEmail(String email) {
         StringBuilder queryFind = new StringBuilder();
-        queryFind.append("select id from USER where email = ").append(email);
+        queryFind.append("select id from USER where email = '").append(email).append("'");
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath); Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(String.valueOf(queryFind));
             UserByIdRequest userByIdRequest = new UserByIdRequest();
@@ -60,7 +60,7 @@ public class AdministrationDAO {
         String nameOfNews = newsPost.getArticle(), textNews = newsPost.getTextNews();
         long datePosting = System.currentTimeMillis();
         StringBuilder queryNews = new StringBuilder();
-        queryNews.append("insert into newsOnSite (nameOfNews, textNews, datePosting) values ('").append(nameOfNews).append("','")
+        queryNews.append("insert into newsOnSite (article, textNews, datePosting) values ('").append(nameOfNews).append("','")
         .append(textNews).append("','").append(datePosting).append("');");
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryNews));

@@ -112,9 +112,10 @@ public class UserController {
 
     @ApiOperation(value = "Пользователь редактиркует информацию о себе")
     @RequestMapping(value = "change/info", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changeInfoUser (@RequestBody UserChangeInfoRequest userChangeInfoRequest) {
+    public ResponseEntity<Boolean> changeInfoUser (HttpServletRequest request, UserChangeInfoRequest UCIR) {
+        String username = (String) request.getSession().getAttribute("username");
 
-        Boolean bool = UIDAO.changeInfoUser(userChangeInfoRequest);
+        Boolean bool = UIDAO.changeInfoUser(username, UCIR.getInfo());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
