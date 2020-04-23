@@ -53,7 +53,10 @@
 //}
 package com.beernetwork.web.app.controllers;
 
-import com.beernetwork.web.app.api.request.*;
+import com.beernetwork.web.app.api.request.AdminSearchUserByEmailRequest;
+import com.beernetwork.web.app.api.request.UserByIdRequest;
+import com.beernetwork.web.app.api.request.UserChangeInfoRequest;
+import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
 import com.beernetwork.web.app.dao.UserInteractionDAO;
 import com.beernetwork.web.app.model.User;
 import io.swagger.annotations.ApiOperation;
@@ -99,20 +102,21 @@ public class UserController {
         return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Пользователь добавляеть свою фотографию")
-    @RequestMapping(value = "change/Photo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changePhotoUser (@RequestBody UserChangePhotoRequest userChangePhotoRequest) {
-
-        Boolean bool = UIDAO.changePhotoUser(userChangePhotoRequest);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
-    }
+//    @ApiOperation(value = "Пользователь добавляеть свою фотографию")
+//    @RequestMapping(value = "change/Photo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Boolean> changePhotoUser (@RequestBody UserChangePhotoRequest userChangePhotoRequest,@RequestBody HttpServletRequest request) {
+//        String username = (String) request.getSession().getAttribute("username");
+//
+//        Boolean bool = UIDAO.changePhotoUser(userChangePhotoRequest.getImage(), username);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
+//    }
 
     @ApiOperation(value = "Пользователь редактиркует информацию о себе")
     @RequestMapping(value = "change/info", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changeInfoUser (HttpServletRequest request, UserChangeInfoRequest UCIR) {
+    public ResponseEntity<Boolean> changeInfoUser (@RequestBody HttpServletRequest request,@RequestBody UserChangeInfoRequest UCIR) {
         String username = (String) request.getSession().getAttribute("username");
 
         Boolean bool = UIDAO.changeInfoUser(username, UCIR.getInfo());
@@ -124,7 +128,7 @@ public class UserController {
 
     @ApiOperation(value = "Пользователь редактирует свой пароль")
     @RequestMapping(value = "change/password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changePasswordUser (@RequestBody UserChangePasswordRequest userChangePasswordRequest, HttpServletRequest request) {
+    public ResponseEntity<Boolean> changePasswordUser (@RequestBody UserChangePasswordRequest userChangePasswordRequest, @RequestBody HttpServletRequest request) {
         String username = (String) request.getSession().getAttribute("username");
         Boolean bool = UIDAO.changePasswordUser(userChangePasswordRequest, username);
 
@@ -143,4 +147,5 @@ public class UserController {
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
+
 }

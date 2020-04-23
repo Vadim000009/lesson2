@@ -1,10 +1,18 @@
 package com.beernetwork.web.app.api.request;
 
-import java.net.URL;
+import java.awt.*;
 
 public class UserChangePhotoRequest {
     private Integer id;
-    private URL urlPic;
+    private Image image;
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;
@@ -12,13 +20,5 @@ public class UserChangePhotoRequest {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public URL getUrlPic() {
-        return urlPic;
-    }
-
-    public void setUrlPic(URL urlPic) {
-        this.urlPic = urlPic;
     }
 }

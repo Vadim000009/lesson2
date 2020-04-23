@@ -2,7 +2,6 @@ package com.beernetwork.web.app.dao;
 
 import com.beernetwork.web.app.api.request.UserByIdRequest;
 import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
-import com.beernetwork.web.app.api.request.UserChangePhotoRequest;
 import com.beernetwork.web.app.model.User;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
@@ -66,7 +65,7 @@ public class UserInteractionDAO implements InitializingBean {
         } else if (id == 1) {
             ID++;
         }
-        String query = "select fstName, secName, patronymic, gender, dateBirthday, info from USER where ID = " + ID;
+        String query = "select fstName, secName, patronymic, gender, dateBirthday, info, photo from USER where ID = " + ID;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(query);
@@ -77,10 +76,12 @@ public class UserInteractionDAO implements InitializingBean {
             user.setGender(resultSet.getString("gender"));
             user.setDateBirthday(resultSet.getDate("dateBirthday"));
             user.setInfo(resultSet.getString("info"));
-            // Добавить информацию про фото. Если нет, то pizdos.jpg
+            if (resultSet.getString("photo") == null) {
+                user.setPhoto("photo-users/zdos.png");
+            }
             return user;
         } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос. Получение пользователя из БД.");
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Получение пользователя из БД." + ex);
             if (ID >= MAXID) {
                 return null;
             } else {
@@ -127,18 +128,43 @@ public class UserInteractionDAO implements InitializingBean {
         }
     }
 
-    public Boolean changePhotoUser (@NotNull UserChangePhotoRequest userChangePhotoRequest) {
-        StringBuilder queryPhoto = new StringBuilder();
-        queryPhoto.append("UPDATE USER set photo=").append(userChangePhotoRequest.getUrlPic()).append("where id =").append(userChangePhotoRequest.getId());
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPhoto))) {
-            stat.execute();
-            return true;
-        } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
-            return false;
-        }
-    }
+//    public Boolean changePhotoUser (@NotNull MediaType media, int email) {
+//        StringBuilder queryPhoto = new StringBuilder();
+//        String query = "SELECT id FROM USER WHERE email='" + email + "'";
+//        int id = 0;
+//        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+//             Statement stat = conn.createStatement()) {
+//            ResultSet resultSet = stat.executeQuery(query);
+//            id = resultSet.getInt("id");
+//        } catch (SQLException ex) {
+//            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
+//            return false;
+//        }
+//        try {
+//            File file = new File("/beernetwork/images/" + id + "/");
+//        if (!file.exists()) {
+//            file.mkdirs();
+//        }
+//            FileOutputStream fos = new FileOutputStream(media.getParameter());
+//            file.toPath( "/beernetwork/images/" + id + "/" + fos.close(););
+//            fos.close();
+//        } catch (IOException ex) {
+//
+//            }
+//        } catch(IOException ex) {
+//            log.log(Level.WARNING, "Ошибка обновления фотографии");
+//            return false;
+//        }
+//        queryPhoto.append("UPDATE USER set photo=").append(userChangePhotoRequest.getUrlPic()).append("where id =").append(userChangePhotoRequest.getId());
+//        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+//             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPhoto))) {
+//            stat.execute();
+//            return true;
+//        } catch (SQLException ex) {
+//            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
+//            return false;
+//        }
+//    }
 
     public Boolean changeInfoUser (String email, String text) {
         StringBuilder queryInfo = new StringBuilder();

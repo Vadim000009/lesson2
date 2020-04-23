@@ -21,7 +21,7 @@
         }
         function updatePhoto() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "api/select/admin/delete/User");
+            xhr.open("POST", "api/select/user/uploadMultiFile");
             xhr.setRequestHeader("Content-type", "application/json");
 
             var admin_deleteUser = document.getElementById("deleteUser").value;
@@ -106,8 +106,8 @@
                     <div class="form-group">
                         <form onsubmit="updatePhoto()" name="updatePhoto">
                             <div class="form-updatePhoto">
-                                <label for="updatePhoto">Хотите обновить фото? Загрузите тут:</label>
-                                <input type="number" required class="form-control" id="updatePhoto" name="updatePhoto">
+                                <label for="updatePhoto">Хотите обновить фото? Загрузите тут:<br>Внимание, максимальный размер файла 1 Мб.<br>Принимаются jpeg, png размером 250х250 пикселей</label>
+                                <input type="file" required class="form-control" id="updatePhoto" name="updatePhoto">
                                 <button type="submit" id="updatePhotoSubmit" class="btn btn-primary btn-lg">Отправить</button>
                             </div>
                         </form>

@@ -27,6 +27,7 @@
                 gender: "",
                 dateBirthday: "",
                 info: "",
+                photo: ""
             };
             xhr.setRequestHeader("Content-type", "application/json");
             var params = {"id" : number};
@@ -43,6 +44,7 @@
                     document.getElementById("gender").innerHTML = obj.gender;
                     document.getElementById("dateBirthday").innerHTML = obj.dateBirthday;
                     document.getElementById("info").innerHTML = obj.info;
+                    document.getElementById("photo").src = obj.photo;
                 }
             };
         }
@@ -92,7 +94,10 @@
                     <div class="form-group" align="center">
                         <table>
                             <tr>
-                                <td rowspan="3">ФОТО</td>
+                                <img rowspan="3">
+<!--                                    <output name="photo" id="photo" type="image"></output-->
+                                    <img id="photo" src="">
+                                </td>
                                 <td><output name="fstName" id="fstName"></output></td>
                                 <td><output name="secName" id="secName"></output></td>
                                 <td><output name="patronymic" id="patronymic"></output></td>

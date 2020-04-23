@@ -1,5 +1,6 @@
 package com.beernetwork.web.app.model;
 
+
 import java.util.Date;
 
 public class User {
@@ -13,6 +14,16 @@ public class User {
     private String telephone;
     private String password;
     private String info;
+
+    private String photo;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public Integer getId() {
         return id;
