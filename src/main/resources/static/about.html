@@ -1,99 +1,117 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>About Me</title>
-        <meta charset="UTF-8">
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/ico" href="favicon.ico"/>
-        <link rel = "stylesheet" href = "css/style-about.css">
-        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> 
-        <style type = "text/css">@import url("css/imagesDynamicUpdate.css");</style>
-    </head>
-    <body>
-        <header>
-            <div class="header-center"> 
-                <a href="index.html" class="blubtn">Главная</a>
-                <a href="" disabled class="blubtn">Галерея</a>
-                <a href="" disabled class="blubtn">Блог</a>
-            </div>
-        </header>
-        <div class="content">
-            <div id="welcomeHeader">
-                <div class="div-style">
-                    <img src="images-about/wel1.jpg" class="img-style im-1">
-                    <img src="images-about/wel2.jpg" class="img-style next im-2">
-                    <img src="images-about/wel3.jpg" class="img-style next im-3">
-                    <img src="images-about/wel4.jpg" class="img-style next im-4">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Пивная карта | Beer Network</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=8bd454d6-86f9-42be-a031-5c087c705f94&lang=ru_RU" type="text/javascript"></script>
+    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+    <link rel = "stylesheet" href = "css/style-about.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light"><a class="navbar-brand" href="index.html">Beer Network</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item"> <a class="nav-link" href="index.html">Главная</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="news.html">Новости</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="beermap.html">Карта Пивных</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="about.html">О Сайте</a> </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Личный кабинет</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="editMyPage.html">Редактировать</a>
+                        <a class="dropdown-item" href="chat.html">Сообщения</a>
+                        <a class="dropdown-item" href="users.html">Собутыльники</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="register.html">Регистрация</a>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</nav>
+<header>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+            <div class="jumbotron">
+                <div class="row text-center">
+                    <div class="text-center col-12">
+                        <h2>О себе</h2>
+                    </div>
+
+                    <div id="education">
+                        <img align="left" src="images/images-about/educ.png">
+                        <h1>МАИ</h1>
+                        <P> Получение высшего в МАИ получилось довольно интересным занятием. В частности оубчение на кафедре
+                            319 "Управление информационной инфраструктурой бизнеса" на 3 факультете МАИ. Ранее кафедра находилась в МАТИ
+                            и называлась "Проектирование Вычислительных Комплексов".</P>
+                        <P> На протяжении учёбы участвовал в волонтёрском центре МАИ, студенческих активах,
+                            профкоме, и конечно же в активной жизни своего вуза.
+                            Благодоря поступлению на эту кафедру теперь могу программировать и писать программы
+                            на разных языках.</P>
+                    </div>
+                    <div id="reposit">
+                        <h1>Репозитории и языки</h1>
+                        <p>До поступления в вуз знал (да и сейчас знаю) замечательный язык Python. В процессе обучения в ВУЗе познакомился
+                            с такими языками, как C, C++, Java, Assembly, HTML и CSS.</p>
+                        <p>Вполне возможно, что если бы я выполнял работу по верстке сайта через готовые решения, моё знакомство с HTML
+                            и CSS могло бы и не начаться, однако решение писать сайт полностью с нуля позволило мне познать этот язык разметки.
+                            Что касается остальных языков - мои знания в их области всегда можно посмотреть на  <a href="https://github.com/Vadim000009"> github</a></p>
+                    </div>
+                    <div id="politic">
+                        <a href="" OnMouseOver="document.getElementById('B_B').src = 'images/images-about/agit2.png'"
+                           accesskey=""OnMouseOut="document.getElementById('B_B').src = 'images/images-about/agit1.png'">
+                            <img id="B_B" src="images/images-about/agit1.png" align="left"></a>
+                        <h1>Политика</h1>
+                        <p>Скажем так - о политике громко не заявляю, но если есть возможность противостоять власти, при условии, что это точно
+                            будет работать - я тут как тут.</p>
+                        <br>
+                        <a href="https://mundep.gudkov.ru/fundraising/team/710">Выдвижение демократов в муниципальные депутаты в Москве | 2017</a>
+                        <br>
+                        <h2>Газета</h2>
+                        <p>За время депутатской компании было выпущенно около 11000 газеты и 16000 листовок, а так же 7000 открыток с приглашением
+                            прийти на выборы. Особый вклад внесла газета. Очень богата была написанна газета. Были напомненны основные проблемы района,
+                            бездействие властей и повсеместно напомненно о том, что нужно не забывать сходить 10 сентября. Автор статьи - Татьяна
+                            Шавшукова. Если бы не она, возможно газета так бы и осталась в планах.</p>
+                        <h2>Листовки и открытки</h2>
+                        <p>Как уже ранее говорилось, листовок было 16000, а открыток 7000. Они внесли особый вклад. Красивая листовка с фотографией района
+                            и пара слов о себе. И почти точно такие же открытки, за исключением того, что в открытках именно приглашали на выборы. Так же,
+                            хочется отметить, что открытки разносил я и знакомый. Незабываемое ощущение....</p>
+                    </div>
+                    <div id = "volont">
+                        <a href="https://mosvolonter.ru">
+                            <img align="right" src="images/images-about/volontBook.png"></a>
+                        <h1>Волонтёрство</h1>
+                        <p>Это что-то на уровне "Я готов в любой момент помочь" и "Если это воскресенье - то меня нет". Имеется волонтёрская книжка и богатый опыт
+                            работы. Так же активный активный волонтёр волонтёрского центра МАИ.</p>
+                    </div>
+
+
                 </div>
-            </div>
-            <div id="education">
-                <img align="left" src="images-about/educ.png">
-                <h1>МАИ</h1>
-                <P> Получение высшего в МАИ получилось довольно интересным занятием. В частности оубчение на кафедре
-                    319 "Управление информационной инфраструктурой бизнеса" на 3 факультете МАИ. Ранее кафедра находилась в МАТИ
-                    и называлась "Проектирование Вычислительных Комплексов".</P>
-                <P> На протяжении учёбы участвовал в волонтёрском центре МАИ, студенческих активах, 
-                    профкоме, и конечно же в активной жизни своего вуза.
-                    Благодоря поступлению на эту кафедру теперь могу программировать и писать программы
-                    на разных языках.</P>
-            </div>
-            <div id="reposit">
-                <div class="div-code">
-                    <img align="right" src="images-about/c.png" class="img-style im-1">
-                    <img align="right" src="images-about/python.png" class="img-style next im-2">
-                    <img align="right" src="images-about/java.png" class="img-style next im-3">
-                    <img align="right" src="images-about/htmlcss.png" class="img-style next im-4">
-                </div>
-                <h1>Репозитории и языки</h1>
-                <p>До поступления в вуз знал (да и сейчас знаю) замечательный язык Python. В процессе обучения в ВУЗе познакомился
-                    с такими языками, как C, C++, Java, Assembly, HTML и CSS.</p>
-                <p>Вполне возможно, что если бы я выполнял работу по верстке сайта через готовые решения, моё знакомство с HTML
-                    и CSS могло бы и не начаться, однако решение писать сайт полностью с нуля позволило мне познать этот язык разметки.
-                    Что касается остальных языков - мои знания в их области всегда можно посмотреть на github (иконка внизу страницы кликабельна).</p>
-            </div>
-            <div id="politic">
-                <a href="#" OnMouseOver="document.getElementById('B_B').src = 'images-about/agit2.png'"
-                   accesskey=""OnMouseOut="document.getElementById('B_B').src = 'images-about/agit1.png'">
-                    <img id="B_B" src="images-about/agit1.png" align="left"></a>
-                <h1>Политика</h1>
-                <p>Скажем так - о политике громко не заявляю, но если есть возможность противостоять власти, при условии, что это точно
-                    будет работать - я тут как тут.</p>
-                <br>
-                <a href="https://mundep.gudkov.ru/fundraising/team/710">Выдвижение демократов в муниципальные депутаты в Москве | 2017</a>
-                <br>
-                <h2>Газета</h2>
-                <p>За время депутатской компании было выпущенно около 11000 газеты и 16000 листовок, а так же 7000 открыток с приглашением
-                    прийти на выборы. Особый вклад внесла газета. Очень богата была написанна газета. Были напомненны основные проблемы района,
-                    бездействие властей и повсеместно напомненно о том, что нужно не забывать сходить 10 сентября. Автор статьи - Татьяна
-                    Шавшукова. Если бы не она, возможно газета так бы и осталась в планах.</p>
-                <h2>Листовки и открытки</h2>
-                <p>Как уже ранее говорилось, листовок было 16000, а открыток 7000. Они внесли особый вклад. Красивая листовка с фотографией района
-                    и пара слов о себе. И почти точно такие же открытки, за исключением того, что в открытках именно приглашали на выборы. Так же, 
-                    хочется отметить, что открытки разносил я и знакомый. Незабываемое ощущение....</p>
-            </div>
-            <div id = "volont">
-                <a href="https://mosvolonter.ru"> 
-                <img align="right" src="images-about/volontBook.png"></a>
-                <h1>Волонтёрство</h1>
-                <p>Это что-то на уровне "Я готов в любой момент помочь" и "Если это воскресенье - то меня нет". Имеется волонтёрская книжка и богатый опыт
-                    работы. Так же активный активный волонтёр волонтёрского центра МАИ.</p>
             </div>
         </div>
-        <div class="footer">
-            <div class="w-container footer-container">
-                <div class="footer-left">&#169; 20!8 Rodionov V. S.</div>
-                <div class="footer-right"> 
-                    <a href="https://www.facebook.com/vadim.rodionov.3">
-                        <i class="icon-facebook-sign" style="font-size:24px;"></i></a> 
-                    <a href="https://github.com/Vadim000009"> 
-                        <i class="icon-github" style="font-size:24px;"></i></a>  
-                    <a href="https://vk.com/pasta_monster"> 
-                        <i class="icon-vk" style="font-size:24px;"></i></a>
-                    <a href="https://www.instagram.com/tuukvadim/">
-                        <i class="icon-instagram" style="font-size:24px;"></i></a>
-                </div>
+    </div>
+</div>
+</body>
+<footer class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>©Шейх-Депутат Продакшн. Все права защищены.</p>
             </div>
         </div>
-    </body>
+    </div>
+</footer>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap-4.0.0.js"></script>
 </html>
