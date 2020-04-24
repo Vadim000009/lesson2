@@ -64,12 +64,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "/api/select/user")
@@ -102,22 +102,23 @@ public class UserController {
         return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Пользователь добавляеть свою фотографию")
-//    @RequestMapping(value = "change/Photo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Boolean> changePhotoUser (@RequestBody UserChangePhotoRequest userChangePhotoRequest,@RequestBody HttpServletRequest request) {
-//        String username = (String) request.getSession().getAttribute("username");
-//
-//        Boolean bool = UIDAO.changePhotoUser(userChangePhotoRequest.getImage(), username);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Пользователь добавляеть свою фотографию")
+    @RequestMapping(value = "change/Photo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> changePhotoUser (@RequestBody MultipartFile image) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.print(username);
+
+        Boolean bool = UIDAO.changePhotoUser(image, username);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(bool, headers, HttpStatus.OK);
+    }
 
     @ApiOperation(value = "Пользователь редактиркует информацию о себе")
     @RequestMapping(value = "change/info", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changeInfoUser (@RequestBody HttpServletRequest request,@RequestBody UserChangeInfoRequest UCIR) {
-        String username = (String) request.getSession().getAttribute("username");
+    public ResponseEntity<Boolean> changeInfoUser (@RequestBody UserChangeInfoRequest UCIR) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Boolean bool = UIDAO.changeInfoUser(username, UCIR.getInfo());
 
@@ -128,8 +129,9 @@ public class UserController {
 
     @ApiOperation(value = "Пользователь редактирует свой пароль")
     @RequestMapping(value = "change/password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changePasswordUser (@RequestBody UserChangePasswordRequest userChangePasswordRequest, @RequestBody HttpServletRequest request) {
-        String username = (String) request.getSession().getAttribute("username");
+    public ResponseEntity<Boolean> changePasswordUser (@RequestBody UserChangePasswordRequest userChangePasswordRequest) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
         Boolean bool = UIDAO.changePasswordUser(userChangePasswordRequest, username);
 
         HttpHeaders headers = new HttpHeaders();

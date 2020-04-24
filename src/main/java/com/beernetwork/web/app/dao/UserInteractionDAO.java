@@ -10,7 +10,12 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,6 +83,8 @@ public class UserInteractionDAO implements InitializingBean {
             user.setInfo(resultSet.getString("info"));
             if (resultSet.getString("photo") == null) {
                 user.setPhoto("photo-users/zdos.png");
+            } else {
+                user.setPhoto(resultSet.getString("photo"));
             }
             return user;
         } catch (SQLException ex) {
@@ -112,7 +119,6 @@ public class UserInteractionDAO implements InitializingBean {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
         StringBuilder query = new StringBuilder();
-        System.out.println(email);
         sendEmail(email);
         query.append("insert into USER (fstName, secName, patronymic, gender, dateBirthday, email, telephone, password, info) values ('")
                 .append(fstName).append("','").append(secName).append("','").append(patronymic).append("','").append(gender)
@@ -128,49 +134,33 @@ public class UserInteractionDAO implements InitializingBean {
         }
     }
 
-//    public Boolean changePhotoUser (@NotNull MediaType media, int email) {
-//        StringBuilder queryPhoto = new StringBuilder();
-//        String query = "SELECT id FROM USER WHERE email='" + email + "'";
-//        int id = 0;
-//        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-//             Statement stat = conn.createStatement()) {
-//            ResultSet resultSet = stat.executeQuery(query);
-//            id = resultSet.getInt("id");
-//        } catch (SQLException ex) {
-//            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
-//            return false;
-//        }
-//        try {
-//            File file = new File("/beernetwork/images/" + id + "/");
-//        if (!file.exists()) {
-//            file.mkdirs();
-//        }
-//            FileOutputStream fos = new FileOutputStream(media.getParameter());
-//            file.toPath( "/beernetwork/images/" + id + "/" + fos.close(););
-//            fos.close();
-//        } catch (IOException ex) {
-//
-//            }
-//        } catch(IOException ex) {
-//            log.log(Level.WARNING, "Ошибка обновления фотографии");
-//            return false;
-//        }
-//        queryPhoto.append("UPDATE USER set photo=").append(userChangePhotoRequest.getUrlPic()).append("where id =").append(userChangePhotoRequest.getId());
-//        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-//             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPhoto))) {
-//            stat.execute();
-//            return true;
-//        } catch (SQLException ex) {
-//            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
-//            return false;
-//        }
-//    }
-
-    public Boolean changeInfoUser (String email, String text) {
-        StringBuilder queryInfo = new StringBuilder();
-        queryInfo.append("UPDATE USER set info=").append(text).append("where email ='").append(email).append("'");
+    public Boolean changePhotoUser (@NotNull MultipartFile image, String email) {
+        StringBuilder queryPhoto = new StringBuilder();
+        String query = "SELECT id FROM USER WHERE email='" + email + "'";
+        int id = 0;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryInfo))) {
+             Statement stat = conn.createStatement()) {
+            ResultSet resultSet = stat.executeQuery(query);
+            id = resultSet.getInt("id");
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
+            return false;
+        }
+        String pathString = new String();
+        try {
+            byte[] bytes = image.getBytes();
+            Path path = Paths.get("photo-users/"+ id + "/" + image.getOriginalFilename());
+            pathString = String.valueOf(path);
+            Files.write(path, bytes);
+
+        } catch (IOException ex) {
+            log.log(Level.WARNING, "Ошибка обновления фотографии");
+            return false;
+        }
+
+        queryPhoto.append("UPDATE USER set photo=").append(pathString).append("where id =").append(id);
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPhoto))) {
             stat.execute();
             return true;
         } catch (SQLException ex) {
@@ -179,7 +169,21 @@ public class UserInteractionDAO implements InitializingBean {
         }
     }
 
-    public Boolean changePasswordUser (@NotNull UserChangePasswordRequest userChangePasswordRequest, String username) {
+    public Boolean changeInfoUser (String email, String text) {
+        StringBuilder queryInfo = new StringBuilder();
+        queryInfo.append("UPDATE USER set info='").append(text).append("' where email ='").append(email).append("'");
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+             Statement stat = conn.createStatement()) {
+            stat.executeQuery(String.valueOf(queryInfo));
+            return true;
+        } catch (SQLException ex) {
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена информации пользователя. Причина:" + ex);
+            return false;
+        }
+    }
+
+    public Boolean changePasswordUser (UserChangePasswordRequest userChangePasswordRequest, String username) {
+
         StringBuilder queryPassword = new StringBuilder();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(userChangePasswordRequest.getPassword());
@@ -187,8 +191,8 @@ public class UserInteractionDAO implements InitializingBean {
         queryFind.append("select * from USER where email = ").append(username);
         UserByIdRequest userByIdRequest = new UserByIdRequest();
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryFind))) {
-            ResultSet resultSet = stat.executeQuery();
+             Statement stat = conn.createStatement()) {
+            ResultSet resultSet = stat.executeQuery(String.valueOf(queryFind));
             userByIdRequest.setId(resultSet.getInt("id"));
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Получение ID пользователя. Причина:" + ex);
@@ -230,8 +234,5 @@ public class UserInteractionDAO implements InitializingBean {
             return false;
         }
     }
-
-    //Если пользователь зашёл на страницу с сообщениями - загрузить все
-    //Если пользователь нажал на отправить - кинут ьв сообщения и создать таблицу
 }
 

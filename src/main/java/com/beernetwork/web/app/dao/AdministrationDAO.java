@@ -19,6 +19,7 @@ import static com.beernetwork.web.app.dao.UserInteractionDAO.dbPath;
 public class AdministrationDAO {
     public Logger log = Logger.getLogger(getClass().getName());
     private final UserInteractionDAO userInteractionDAO;
+
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -38,7 +39,7 @@ public class AdministrationDAO {
             stat.execute();
             return true;
         } catch (SQLException ex) {
-//            log.log(Level.WARNING, "Не удалось выполнить запрос. Удаление пользователя из БД. Причина: ", ex);
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Удаление пользователя из БД. Причина: ", ex);
             return false;
         }
     }

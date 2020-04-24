@@ -10,15 +10,12 @@ public class UserByEmailRequest {
     public static AuthorizationUser selectUserByEmail(String email) {
         StringBuilder query = new StringBuilder();
         query.append("select email, password from USER where email = \"").append(email).append("\"");
-        System.out.println(query);
         try(Connection conn = DriverManager.getConnection("jdbc:sqlite:" + UserInteractionDAO.dbPath);
             Statement stat = conn.createStatement()) {
             ResultSet resultSet = stat.executeQuery(String.valueOf(query));
             AuthorizationUser user = new AuthorizationUser();
             user.setEmail(resultSet.getString("email"));
             user.setPassword(resultSet.getString("password"));
-            System.out.println(user.getEmail());
-            System.out.println("IM HERE");
             if(user.getEmail().equals("tuukvadim@live.com")) {
                 user.setRole("ADMIN");
             } else {
