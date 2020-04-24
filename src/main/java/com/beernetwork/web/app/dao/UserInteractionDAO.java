@@ -210,7 +210,6 @@ public class UserInteractionDAO implements InitializingBean {
     }
 
     public void sendEmail(String emailRegisteredNow) {
-        System.out.println(emailRegisteredNow);
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(emailRegisteredNow);
         msg.setSubject("Добро пожаловать. Снова.");
