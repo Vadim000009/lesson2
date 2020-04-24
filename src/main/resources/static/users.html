@@ -91,23 +91,23 @@
                     <div class="text-center col-12">
                         <h2>Собутыльники</h2>
                     </div>
-                    <div class="form-group" align="center">
+                    <div class="user-group">
                         <table>
                             <tr>
-                                <img rowspan="3">
-<!--                                    <output name="photo" id="photo" type="image"></output-->
+                                <td rowspan="3">
                                     <img id="photo" src="">
                                 </td>
-                                <td><output name="fstName" id="fstName"></output></td>
-                                <td><output name="secName" id="secName"></output></td>
-                                <td><output name="patronymic" id="patronymic"></output></td>
+                                <td align="center"><output name="secName" id="secName"></output></td>
+                                <td> <output name="fstName" id="fstName"></output></td>
+                                <td>  </td>
+                                <td> <output name="patronymic" id="patronymic"></output></td>
                             </tr>
                             <tr>
-                                <td><output name="dateBirthday" id="dateBirthday"></output></td>
-                                <td colspan="2"><output name="gender" id="gender"></output></td>
+                                <td colspan="2">Дата рождения: <output name="dateBirthday" id="dateBirthday"></output></td>
+                                <td colspan="2">Пол: <output name="gender" id="gender"></output></td>
                             </tr>
                             <tr>
-                                <td colspan="3"><output name="info" id="info"></output></td>
+                                <td colspan="4">Информация: <output name="info" id="info"></output></td>
                             </tr>
                         </table>
                         <input id="next" type="submit" value="Предыдущий" onclick="previousUser()">

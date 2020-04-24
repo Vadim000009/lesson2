@@ -2140,6 +2140,13 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 .form-group {
   margin-bottom: 1rem;
 }
+.user-group {
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 100%;
+}
 
 .form-text {
   display: block;
