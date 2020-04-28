@@ -16,14 +16,21 @@ public class UserByEmailRequest {
             AuthorizationUser user = new AuthorizationUser();
             user.setEmail(resultSet.getString("email"));
             user.setPassword(resultSet.getString("password"));
-            if(user.getEmail().equals("tuukvadim@live.com")) {
-                user.setRole("ADMIN");
-            } else {
+            query.setLength(0);
+            query.append("SELECT email FROM ADMIN WHERE email = \"").append(email).append("\"");
+            try {
+                ResultSet resultSetForCheck = stat.executeQuery(String.valueOf(query));
+                resultSetForCheck.getString("email");
+                if (!resultSetForCheck.wasNull()) {
+                    user.setRole("ADMIN");
+                }
+            } catch (SQLException e) {
+                System.out.println("suika");
                 user.setRole("USER");
             }
             return user;
         } catch (SQLException e) {
-            System.out.println("Ошибка получения пользователя из БД при аутентификации" + e.getMessage());
+            System.out.println("Ошибка получения пользователя из БД при аутентификации: " + e.getMessage());
             return new AuthorizationUser();
         }
     }

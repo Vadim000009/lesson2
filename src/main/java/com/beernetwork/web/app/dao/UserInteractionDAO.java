@@ -3,7 +3,6 @@ package com.beernetwork.web.app.dao;
 import com.beernetwork.web.app.api.request.UserByIdRequest;
 import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
 import com.beernetwork.web.app.model.User;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -134,7 +133,7 @@ public class UserInteractionDAO implements InitializingBean {
         }
     }
 
-    public Boolean changePhotoUser (@NotNull MultipartFile image, String email) {
+    public Boolean changePhotoUser (MultipartFile image, String email) {
         StringBuilder queryPhoto = new StringBuilder();
         String query = "SELECT id FROM USER WHERE email='" + email + "'";
         int id = 0;
