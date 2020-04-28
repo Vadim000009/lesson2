@@ -25,7 +25,6 @@ public class UserByEmailRequest {
                     user.setRole("ADMIN");
                 }
             } catch (SQLException e) {
-                System.out.println("suika");
                 user.setRole("USER");
             }
             return user;
