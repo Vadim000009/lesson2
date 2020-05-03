@@ -31,7 +31,6 @@
             reader.onload = (function (f) {
                 return function (e) {
                     xhr.send(JSON.stringify({"image": this.result}));
-                    console.log(params);
                 };
             })(file);
         }
