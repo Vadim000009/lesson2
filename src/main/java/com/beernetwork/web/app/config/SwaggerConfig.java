@@ -31,7 +31,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Micro soft service aka 'Beer Network' by Rodionov V. S.")
                 .description("Приятный микро сервис смягкими ограничениями. Не 2ch конечно,\n но отличная сеть для общения русско говорящего населения о пивке")
-                .version("Beta 0.9 Candidate 1")
+                .version("Release 1.0.0.2")
                 .build();
     }
 }
