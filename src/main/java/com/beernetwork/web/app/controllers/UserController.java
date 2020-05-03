@@ -53,10 +53,7 @@
 //}
 package com.beernetwork.web.app.controllers;
 
-import com.beernetwork.web.app.api.request.AdminSearchUserByEmailRequest;
-import com.beernetwork.web.app.api.request.UserByIdRequest;
-import com.beernetwork.web.app.api.request.UserChangeInfoRequest;
-import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
+import com.beernetwork.web.app.api.request.*;
 import com.beernetwork.web.app.dao.UserInteractionDAO;
 import com.beernetwork.web.app.model.User;
 import io.swagger.annotations.ApiOperation;
@@ -69,12 +66,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "/api/select/user")
 public class UserController {
-    private final UserInteractionDAO UIDAO;
+
+    private UserInteractionDAO UIDAO;
 
     public UserController(UserInteractionDAO UIDao) {
         this.UIDAO = UIDao;
@@ -102,13 +99,11 @@ public class UserController {
         return new ResponseEntity<>(bool, headers, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Пользователь добавляеть свою фотографию")
-    @RequestMapping(value = "change/Photo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> changePhotoUser (@RequestBody MultipartFile image) {
+    @ApiOperation(value = "Пользователь добавляет свою фотографию")
+    @RequestMapping(value = "change/photo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> changePhotoUser (@RequestBody UserChangePhotoRequest imageBase64) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.print(username);
-
-        Boolean bool = UIDAO.changePhotoUser(image, username);
+        Boolean bool = UIDAO.changePhotoUser(username, imageBase64);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

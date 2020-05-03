@@ -2,6 +2,7 @@ package com.beernetwork.web.app.dao;
 
 import com.beernetwork.web.app.api.request.UserByIdRequest;
 import com.beernetwork.web.app.api.request.UserChangePasswordRequest;
+import com.beernetwork.web.app.api.request.UserChangePhotoRequest;
 import com.beernetwork.web.app.model.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import javax.servlet.ServletContext;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +22,9 @@ public class UserInteractionDAO implements InitializingBean {
     public static String dbPath = "wholovebeer.db";
     private int ID = 0;
     private int MAXID = 0;
+
+    @Autowired
+    ServletContext servletContext;
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -55,19 +55,25 @@ public class UserInteractionDAO implements InitializingBean {
     }
 
     /*
-    * Пользователь просматривает других пользователей
-    * На основе нажатия кнопки, пользователь получает информацию о том или ином пользователе. Шаг всегда +-1.
-    */
+     * Пользователь просматривает других пользователей
+     * На основе нажатия кнопки, пользователь получает информацию о том или ином пользователе. Шаг всегда +-1.
+     */
     public User getUserFromDB(int id) {
         howManyUsers();
-        if(id == 0) {
+        if (id == 0) {
             ID--;
-            if(ID == -1) {
+            if (ID == -1) {
                 ID = 0;
                 return null;
             }
         } else if (id == 1) {
             ID++;
+        } else if (id == -1) {
+            ID--;
+            if (ID == -1) {
+                ID = 0;
+                return null;
+            }
         }
         String query = "select fstName, secName, patronymic, gender, dateBirthday, info, photo from USER where ID = " + ID;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
@@ -90,11 +96,15 @@ public class UserInteractionDAO implements InitializingBean {
             log.log(Level.WARNING, "Не удалось выполнить запрос. Получение пользователя из БД." + ex);
             if (ID >= MAXID) {
                 return null;
-            } else {
+            } else if (id == 1) {
                 return getUserFromDB(1);
+            } else if (id == -1) {
+                return getUserFromDB(-1);
             }
         }
+        return null;
     }
+
 
     private void howManyUsers() {
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
@@ -133,37 +143,15 @@ public class UserInteractionDAO implements InitializingBean {
         }
     }
 
-    public Boolean changePhotoUser (MultipartFile image, String email) {
-        StringBuilder queryPhoto = new StringBuilder();
-        String query = "SELECT id FROM USER WHERE email='" + email + "'";
-        int id = 0;
+    public Boolean changePhotoUser (String email, UserChangePhotoRequest imageBase64) {
+        StringBuilder query = new StringBuilder();
+        query.append("UPDATE USER set photo=\"").append(imageBase64.getImage()).append("\" where email =\"").append(email).append("\"");
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
              Statement stat = conn.createStatement()) {
-            ResultSet resultSet = stat.executeQuery(query);
-            id = resultSet.getInt("id");
-        } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
-            return false;
-        }
-        String pathString = new String();
-        try {
-            byte[] bytes = image.getBytes();
-            Path path = Paths.get("photo-users/"+ id + "/" + image.getOriginalFilename());
-            pathString = String.valueOf(path);
-            Files.write(path, bytes);
-
-        } catch (IOException ex) {
-            log.log(Level.WARNING, "Ошибка обновления фотографии");
-            return false;
-        }
-
-        queryPhoto.append("UPDATE USER set photo=").append(pathString).append("where id =").append(id);
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-             PreparedStatement stat = conn.prepareStatement(String.valueOf(queryPhoto))) {
-            stat.execute();
+            stat.executeQuery(String.valueOf(query));
             return true;
         } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена пароля пользователя. Причина:" + ex);
+            log.log(Level.WARNING, "Не удалось выполнить запрос. Смена фото пользователя. Причина:" + ex);
             return false;
         }
     }

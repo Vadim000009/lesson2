@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Администратор | Beer Network</title>
+    <title>Редактирование | Beer Network</title>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <script type="text/javascript">
         window.onload = function () {
@@ -21,20 +21,21 @@
                 document.getElementById("passwordCheck").setCustomValidity('');
         }
 
-        function updatePhoto() {
+        function updphoto() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "api/select/user/change/photo");
             xhr.setRequestHeader("Content-type", "application/json");
-
-            var user_updatePhoto = document.getElementById("file").value;
-            var params = {"photo": user_updatePhoto};
-            xhr.send(JSON.stringify(params));
-            if (xhr.onload.prototype.status === XMLHttpRequest.DONE) {
-                alert("Пользователь удалён");
-            } else {
-                alert("Неудача! Проверьте id или обратитесь к системному администратору.");
-            }
+            var file = document.getElementById("file").files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (function (f) {
+                return function (e) {
+                    xhr.send(JSON.stringify({"image": this.result}));
+                    console.log(params);
+                };
+            })(file);
         }
+
         function updpas() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "api/select/user/change/password");
@@ -104,13 +105,13 @@
                         <h2>Редактировать страницу</h2>
                     </div>
                     <div class="form-group">
-                        <form onsubmit="updatePhoto()" name="updatePhoto">
                             <div class="form-updatePhoto">
+                                <form onsubmit="updphoto()" name="updatePhoto">
                                 <label for="file">Хотите обновить фото? Загрузите тут:<br>Внимание, максимальный размер файла 1 Мб.<br>Принимаются jpeg, png размером 250х250 пикселей</label>
                                 <input type="file" required class="form-control" id="file" name="file">
                                 <button type="submit" id="updatePhotoSubmit" class="btn btn-primary btn-lg">Отправить</button>
+                                </form>
                             </div>
-                        </form>
                         <form onsubmit="updpas()" name="updatePassword">
                             <div class="form-group">
                                 <label for="password">Пароль<br>Пароль должен быть:<br>больше 8 символов<br>иметь строчные и заглавные буквы<br>иметь хотя бы одну цифру</label>

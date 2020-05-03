@@ -1,15 +1,16 @@
 package com.beernetwork.web.app.api.request;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class UserChangePhotoRequest {
     private Integer id;
+    private String image;
 
-    public void setImage(MultipartFile image) {
-        this.image = image;
+    public String getImage() {
+        return image;
     }
 
-    private MultipartFile image;
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;
