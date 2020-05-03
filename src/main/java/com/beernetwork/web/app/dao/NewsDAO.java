@@ -15,14 +15,20 @@ public class NewsDAO {
 
     public NewsPost getNewsFromDB(int id) {
         howManyNews();
-        if(id == 0) {
+        if (id == 0) {
             ID--;
-            if(ID == -1) {
+            if (ID == -1) {
                 ID = 0;
                 return null;
             }
         } else if (id == 1) {
             ID++;
+        } else if (id == -1) {
+            ID--;
+            if (ID == -1) {
+                ID = 0;
+                return null;
+            }
         }
         String query = "select article, textNews, datePosting from newsOnSite where ID = " + ID;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + UserInteractionDAO.dbPath);
@@ -37,10 +43,13 @@ public class NewsDAO {
             log.log(Level.WARNING, "Не удалось выполнить запрос. Получение новости из БД. Причина:", ex);
             if (ID >= MAXID) {
                 return null;
-            } else {
+            } else if (id == 1) {
                 return getNewsFromDB(1);
+            } else if (id == -1) {
+                return getNewsFromDB(-1);
             }
         }
+        return null;
     }
     private void howManyNews() {
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + UserInteractionDAO.dbPath);
