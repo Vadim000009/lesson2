@@ -28,26 +28,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/select/user/get/news").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/ws/**").permitAll()
-                .antMatchers("/images/**").permitAll()
-                .antMatchers("/photo-users/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/js/**").permitAll()
+
                 .antMatchers("/about.html").permitAll()
-                .antMatchers("/adminPage.html").hasRole("ADMIN")
-                .antMatchers("/beermap.html").permitAll()
-                .antMatchers("/chat.html").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/editMyPage.html").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/index.html").permitAll()
-                .antMatchers("/news.html").permitAll()
-                .antMatchers("/register.html").permitAll()
-                .antMatchers("/favicon.ai").permitAll()
+                .antMatchers("/home.html").permitAll()
+                .antMatchers("/login.html").permitAll()
+
+                .antMatchers("/superpage.html").hasRole("ADMIN")
+                .antMatchers("/orderandcontracts.html").hasAnyRole("USER_Fin")
+                .antMatchers("/artcouncils.html").hasAnyRole("USER_Art")
+                .antMatchers("/inventory.html").hasAnyRole("USER_Inv")
+                .antMatchers("/employees.html").hasAnyRole("USER_Emp")
+                .antMatchers("/improvingquality.html").hasAnyRole("USER_Qua")
                 .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("/users.html").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login.html").permitAll()
                 .loginProcessingUrl("/login").permitAll()
-                .defaultSuccessUrl("/news.html",true);
+                .defaultSuccessUrl("/news.html",true);  // Исправить
 
     }
 }
