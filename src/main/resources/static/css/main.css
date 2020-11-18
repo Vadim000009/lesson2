@@ -1,18 +1,48 @@
-.header-panel {
-    margin-top: 50px;
-    background-image: images/backgroundHeader.jpg;
+#header-panel {
+    position: fixed;
+    left: 0; top: 0;
+    padding: 4px;
+    width: 100%;
+    background: #4182b5;
 }
 .center-news {
-    margin-top: 10px;
+    position: fixed;
+    margin-top: 20px;
     margin-bottom: 40px;
     margin-left: 20px;
     margin-right: 20px;
+    background: #f0f0f0;
 }
 .post {
     margin-left: 5px;
-    position: left;
+    text-align: left;
 }
-.center-bottom {
-    position: center;
-    margin-outside: 30px;
+#center-bottom {
+    position: fixed; /* Фиксированное положение */
+    text-align: center;
+    left: 0; bottom: 0; /* Левый нижний угол */
+    padding: 1px; /* Поля вокруг текста */
+    background: #4b6bb5; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    width: 100%; /* Ширина слоя */
+}
+
+header.button {
+    display: inline-block;
+    color: #fff;
+    padding: 12px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: Tahoma;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 100;
+}
+
+a.button-red {
+    background-color: red;
+}
+
+a.button-green {
+    background-color: green;
 }
