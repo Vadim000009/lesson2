@@ -54,7 +54,7 @@ table {
     bottom: 0;
     left: 0;
     margin: auto;
-    background: url(1.png) repeat;
+    background: white;
 }
 #addNewEmployee:target {display: block;}
 .close {
