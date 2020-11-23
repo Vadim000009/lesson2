@@ -13,10 +13,24 @@
     margin-right: 20px;
     background: #f0f0f0;
 }
-.post {
+#post {
     margin-left: 5px;
     text-align: left;
+    padding: 12px;
+    border-radius: 3px;
 }
+#post2 {
+    margin-left: 5px;
+    text-align: left;
+    padding: 12px;
+    border-radius: 3px;
+}
+#post3 {
+     margin-left: 5px;
+     text-align: left;
+     padding: 12px;
+     border-radius: 3px;
+ }
 #center-bottom {
     position: fixed; /* Фиксированное положение */
     text-align: center;
@@ -45,4 +59,28 @@ a.button-red {
 
 a.button-green {
     background-color: green;
+}
+
+/**/
+.bodyEmp {
+    margin-top: 10%;
+}
+#blablabla {
+    display: none;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+}
+
+#blablabla.open {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

@@ -1,10 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
+    <link href="css/button.css" rel="stylesheet" type="text/css">
+    <link href="css/employees.css" rel="stylesheet" type="text/css">
+    <script src="js/employees.js"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Рога и Толстовки</title>
 </head>
 <body>
+<div class="header-panel">
+    <a href="login.html" class="button button-gray">Войти</a>
+    <a href="home.html" class="button button-gray">Главная</a>
+    <a href="%URL%" class="button button-gray">Рабочее пространство</a>
+    <!-- Если вошёл - кнопки отключены,  -->
+</div>
+<div id="main">
+    <!--Кнопка добавления человека-->
+    <div id="addNewEmployee">
+        <div id="window">
+            <p align="center">Добавление нового сотрудника</p>
+            <label for="fstName">Имя</label>
+            <input type="text" required class="form-control" id="fstName" name="fstName" placeholder="Имя" aria-describedby="fstName" pattern="^[А-Яа-яЁё\s]+$">
+            <br>
+            <label for="secName">Фамилия</label>
+            <input type="text" required id="secName" class="form-control" name="secName" placeholder="Фамилия" aria-describedby="secName" pattern="^[А-Яа-яЁё]+$">
+            <br>
+            <label for="patronymic">Отчество</label>
+            <input type="text" id="patronymic" class="form-control" name="patronymic" placeholder="Отчество" aria-describedby="patronymic" pattern="^[А-Яа-яЁё\s]+$">
+            <br>
+            <label for="gender">Пол</label>
+            <select class="form-control" id="gender" onchange=>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+            </select>
+            <br>
+            <label for="dateBirthday">Дата рождения</label>
+            <input type="date" id="dateBirthday" required class="form-control" name="calendar">
+            <br>
+            <label for="telephone">Телефон</label>
+            <input type="tel" id="telephone" required placeholder="###-###-####" class="form-control" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            <br>
+            <label for="file">Фото</label>
+            <input type="file" required class="form-control" id="file" name="file">
+            <a href="#" class="close">Отмена</a>
+            <a href="#" class="send">Отправить</a>
+        </div>
+    </div>
 
+    <!--Кнопка добавления замечаний-->
+    <div id="addNewRebuke">
+        <div id="windowRebuke">
+            <p align="center">Запись замечания сотруднику</p>
+            <label for="NSP">ФИО</label>
+            <output name="NSP" id="NSP"></output>
+            <br>
+            <label for="position">Должность</label>
+            <output name="position" id="position"></output>
+            <br>
+            <label for="rebukePost">Замечание</label><br>
+            <input type="text" required id="rebukePost" class="form-control" name="rebukePost" placeholder="Замечание" style="width: 390px; height: 200px; font-size:16px; font-family: Tahoma;">
+            <br>
+            <a href="#" class="close">Отмена</a>
+            <a href="#" class="send">Отправить</a>
+        </div>
+    </div>
+    <!--Кнопка получения карточки сотрудника-->
+
+
+    <!--Кнопки-->
+
+    <div id="listOfEmployee" style="width: 99%;">
+        <a href="#getListOfEmployee">Получить список</a>
+        <a href="#addNewEmployee">Добавить сотрудника</a>
+        <a href="#addNewRebuke">Замечание сотруднику</a>
+        <table border=0>
+            <tr>
+                <th colspan="2" rowspan="4"><img height="250" width="250" id="photo" src=""></th>
+                <th class="col"><input type="text" required id="searchEmployee" class="form-control" name="searchEmployee" placeholder="Поиск сотрудника" style="width: 100%; height: 50%; font-size:16px; font-family: Tahoma;"></th>
+                <th>Кнопка</th>
+            </tr>
+            <tr>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2">ФИО</th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2">Пол</th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2">Должность</th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2">Есть ли замечания?</th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th >Пред</th>
+                <th >След</th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2" ></th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2" ></th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2" ></th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2" ></th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2" ></th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th >Пред страница</th>
+                <th >След страница</th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="center-bottom">
+    <p>ООО "Рога и Толстовки", Разработчик Родионов В. С., 2020</p>
+</div>
 </body>
 </html>
