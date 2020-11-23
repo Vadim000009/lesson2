@@ -1,7 +1,6 @@
 package com.beernetwork.web.app.dao;
 
 import com.beernetwork.web.app.api.request.UserByIdRequest;
-import com.beernetwork.web.app.model.NewsPost;
 import com.beernetwork.web.app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -54,22 +53,6 @@ public class AdministrationDAO {
         } catch (SQLException ex) {
             log.log(Level.WARNING, "Не удалось выполнить запрос. Поиск пользователя в БД. Причина: ", ex);
             return new UserByIdRequest();
-        }
-    }
-
-    public boolean createNews(NewsPost newsPost) {
-        String nameOfNews = newsPost.getArticle(), textNews = newsPost.getTextNews();
-        long datePosting = System.currentTimeMillis();
-        StringBuilder queryNews = new StringBuilder();
-        queryNews.append("insert into newsOnSite (article, textNews, datePosting) values ('").append(nameOfNews).append("','")
-        .append(textNews).append("','").append(datePosting).append("');");
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath)) {
-            PreparedStatement stat = conn.prepareStatement(String.valueOf(queryNews));
-            stat.execute();
-            return true;
-        } catch (SQLException ex) {
-            log.log(Level.WARNING, "Не удалось выполнить запрос. Создание новости. Причина: ", ex);
-            return false;
         }
     }
 
