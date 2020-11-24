@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 @Service
 public class UserInteractionDAO implements InitializingBean {
     public Logger log = Logger.getLogger(getClass().getName());
-    public static String dbPath = "wholovebeer.db";
+    public static String dbPath = "";
     private int ID = 0;
     private int MAXID = 0;
 

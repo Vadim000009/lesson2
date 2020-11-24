@@ -1,46 +1,20 @@
-#header-panel {
+.header-panel {
+    text-align: right;
     position: fixed;
     left: 0; top: 0;
     padding: 4px;
     width: 100%;
     background: #4182b5;
 }
-.center-news {
+.center-bottom {
     position: fixed;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
-    background: #f0f0f0;
-}
-#post {
-    margin-left: 5px;
-    text-align: left;
-    padding: 12px;
-    border-radius: 3px;
-}
-#post2 {
-    margin-left: 5px;
-    text-align: left;
-    padding: 12px;
-    border-radius: 3px;
-}
-#post3 {
-     margin-left: 5px;
-     text-align: left;
-     padding: 12px;
-     border-radius: 3px;
- }
-#center-bottom {
-    position: fixed; /* Фиксированное положение */
     text-align: center;
-    left: 0; bottom: 0; /* Левый нижний угол */
-    padding: 1px; /* Поля вокруг текста */
-    background: #4b6bb5; /* Цвет фона */
-    color: #fff; /* Цвет текста */
-    width: 100%; /* Ширина слоя */
+    left: 0; bottom: 0;
+    padding: 0px;
+    background: #4b6bb5;
+    color: #fff;
+    width: 100%;
 }
-
 header.button {
     display: inline-block;
     color: #fff;
@@ -53,34 +27,6 @@ header.button {
     font-weight: 100;
 }
 
-a.button-red {
-    background-color: red;
-}
-
-a.button-green {
-    background-color: green;
-}
-
-/**/
-.bodyEmp {
-    margin-top: 10%;
-}
-#blablabla {
-    display: none;
-    animation-duration: 1.5s;
-    animation-fill-mode: both;
-    animation-name: fadeIn;
-}
-
-#blablabla.open {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+a.button-gray {
+    background-color: gray;
 }

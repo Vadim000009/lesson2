@@ -14,7 +14,42 @@
 </div>
 <!--Кнопка получения списка вещей на складе-->
 <!--Кнопка отправки товара-->
+<div id="sendPackage">
+    <div id="windowPackage">
+        <p align="center">Отправка товара</p>
+        <label for="order">Номер заказа</label>
+        <input type="text" required class="form-control" id="order" name="order" placeholder="Заказ №" aria-describedby="fstName" pattern="^[А-Яа-яЁё\s]+$">
+        <br>
+        <label for="sendTime">Дата отправки</label>
+        <input type="date" id="sendTime" required class="form-control" name="calendar">
+        <br>
+        <label for="quantity">Количество позиций</label>
+        <input type="text" id="quantity" class="form-control" name="quantity" placeholder="Количество" aria-describedby="patronymic" pattern="^[А-Яа-яЁё\s]+$">
+        <br>
+        <label for="product">Товар</label>
+        <select class="form-control" id="product" onchange=>
+            <option value="id1">тест1</option>
+            <option value="id2">тест2</option>
+        </select>
+        <br>
+        <a href="#" class="close">Отмена</a>
+        <a href="#" class="send">Отправить</a>
+    </div>
+</div>
 <!--Кнопка получения Информации о прибытии товара-->
+<div id="informationWindow">
+    <div id="windowInfo">
+        <p align="center">Прибывающие позиции</p>
+        <label for="quantityResources">Прибывает всего - </label>
+        <output name="quantityResources" id="quantityResources"></output>
+        <br>
+        <label for="delivery">Ближайшая позиция прибывает в </label>
+        <output name="delivery" id="delivery"></output>
+        <br>
+        <a href="#" class="close">Отмена</a>
+        <a href="#" class="send">Отправить</a>
+    </div>
+</div>
 <div id="center-bottom">
     <p>ООО "Рога и Толстовки", Разработчик Родионов В. С., 2020</p>
 </div>
