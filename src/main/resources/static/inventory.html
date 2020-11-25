@@ -2,18 +2,31 @@
 <html lang="ru">
 <head>
     <link href="css/main.css" rel="stylesheet" type="text/css">
+	<link href="css/inventory.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <title>Рога и Толстовки</title>
 </head>
 <body>
-<div id="header-panel" margin-top 50px >
-    <a href="login.html" class=button button-red">Войти</a>
-    <a href="home.html" class="button button-red">Главная</a>
-    <a href="%URL%" class="button button-red">Рабочее пространство</a>
-    <!-- Если вошёл - кнопки отключены,  -->
+<div id = "wrap">
+    <header>
+        <div class = "title">Рога и Толстовки</div>
+        <ul class = "menu">
+            <li><a href = "home.html">Главная</a></li>
+            <li><a href = "">Рабочий стол</a></li>
+            <li><a href = "login.html">Войти\Выйти</a></li>
+        </ul>
+    </header>
 </div>
 <!--Кнопка получения списка вещей на складе-->
 <!--Кнопка отправки товара-->
+<main>
+<div id="inventoryButtons">
+      <a href="#refresh">Получить список</a>
+      <a href="#sendPackage">Отправить товар</a>
+      <a href="#informationWindow">Информация о поставках</a>
+</div>
+
+</main>
 <div id="sendPackage">
     <div id="windowPackage">
         <p align="center">Отправка товара</p>

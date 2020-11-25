@@ -8,11 +8,15 @@
     <title>Рога и Толстовки</title>
 </head>
 <body>
-<div class="header-panel">
-    <a href="login.html" class="button">Войти</a>
-    <a href="home.html" class="button">Главная</a>
-    <a href="%URL%" class="button">Рабочее пространство</a>
-    <!-- Если вошёл - кнопки отключены,  -->
+<div id = "wrap">
+    <header>
+        <div class = "title">Рога и Толстовки</div>
+        <ul class = "menu">
+            <li><a href = "home.html">Главная</a></li>
+            <li><a href = "">Рабочий стол</a></li>
+            <li><a href = "login.html">Войти\Выйти</a></li>
+        </ul>
+    </header>
 </div>
 <div id="main">
     <!--Кнопка добавления человека-->
@@ -65,19 +69,22 @@
         </div>
     </div>
     <!--Кнопка получения карточки сотрудника-->
-
-
-    <!--Кнопки-->
-
-    <div id="listOfEmployee" style="width: 99%;">
-        <a href="#getListOfEmployee">Получить список</a>
-        <a href="#addNewEmployee">Добавить сотрудника</a>
-        <a href="#addNewRebuke">Замечание сотруднику</a>
+    <div id="listOfEmployee" style="width: 98%; margin-top: 3%">
         <table border=0>
             <tr>
-                <th colspan="2" rowspan="4"><img height="250" width="250" id="photo" src=""></th>
+                <th colspan="2"><a href="#getListOfEmployee">Получить список</a></th>
                 <th class="col"><input type="text" required id="searchEmployee" class="form-control" name="searchEmployee" placeholder="Поиск сотрудника" style="width: 100%; height: 50%; font-size:16px; font-family: Tahoma;"></th>
                 <th>Кнопка</th>
+            </tr>
+            <tr>
+                <th colspan="2"><a href="#addNewEmployee">Добавить сотрудника</a></th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
+            </tr>
+            <tr>
+                <th colspan="2" rowspan="4"><img height="250" width="250" id="photo" src=""></th>
+                <th class="col">ТАБЛИЦА</th>
+                <th >Работает?</th>
             </tr>
             <tr>
                 <th class="col">ТАБЛИЦА</th>
@@ -118,22 +125,7 @@
                 <th >Работает?</th>
             </tr>
             <tr>
-                <th colspan="2" ></th>
-                <th class="col">ТАБЛИЦА</th>
-                <th >Работает?</th>
-            </tr>
-            <tr>
-                <th colspan="2" ></th>
-                <th class="col">ТАБЛИЦА</th>
-                <th >Работает?</th>
-            </tr>
-            <tr>
-                <th colspan="2" ></th>
-                <th class="col">ТАБЛИЦА</th>
-                <th >Работает?</th>
-            </tr>
-            <tr>
-                <th colspan="2" ></th>
+                <th colspan="2"><a href="#addNewRebuke">Замечание сотруднику</a></th>
                 <th class="col">ТАБЛИЦА</th>
                 <th >Работает?</th>
             </tr>
@@ -151,8 +143,8 @@
         </table>
     </div>
 </div>
-<div class="center-bottom">
-    <p>ООО "Рога и Толстовки", Разработчик Родионов В. С., 2020</p>
+<div id="center-bottom">
+    <p>Разработчик Родионов В. С., 2020</p>
 </div>
 </body>
 </html>

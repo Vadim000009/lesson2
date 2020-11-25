@@ -1,12 +1,11 @@
-.header-panel {
-    text-align: right;
-    position: fixed;
-    left: 0; top: 0;
-    padding: 4px;
+header{
     width: 100%;
-    background: #4182b5;
+    background: cornflowerblue;
+    height: 70px;
+    position: fixed;
+    top:0; left: 0;
 }
-.center-bottom {
+#center-bottom {
     position: fixed;
     text-align: center;
     left: 0; bottom: 0;
@@ -14,6 +13,17 @@
     background: #4b6bb5;
     color: #fff;
     width: 100%;
+}
+.title{
+    font-size: 36px;
+    padding-top: 10px;
+    text-align: center;
+}
+.menu{
+    list-style: none;
+    position: absolute;
+    top: -10px;
+    right: 100px;
 }
 header.button {
     display: inline-block;
@@ -25,8 +35,4 @@ header.button {
     font-size: 18px;
     line-height: 1;
     font-weight: 100;
-}
-
-a.button-gray {
-    background-color: gray;
 }

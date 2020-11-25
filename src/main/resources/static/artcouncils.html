@@ -1,23 +1,121 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <link href="css/mainn.css" rel="stylesheet" type="text/css">
-    <link href="css/employee.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/artcouncils.css" rel="stylesheet" type="text/css">
     <script src="js/employee.js"></script>
     <meta charset="UTF-8">
     <title>Рога и Толстовки</title>
 </head>
 <body>
-<div class="header-panel">
-    <a href="login.html" class="button">Войти</a>
-    <a href="home.html" class="button">Главная</a>
-    <a href="%URL%" class="button">Рабочее пространство</a>
-    <!-- Если вошёл - кнопки отключены,  -->
+<div id = "wrap">
+    <header>
+        <div class = "title">Рога и Толстовки</div>
+        <ul class = "menu">
+            <li><a href = "home.html">Главная</a></li>
+            <li><a href = "">Рабочий стол</a></li>
+            <li><a href = "login.html">Войти\Выйти</a></li>
+        </ul>
+    </header>
 </div>
-<!--Кнопка добавления нового макета-->
-<!--Кнопка предложения провести собрание-->
+<main>
+    <div id="takeNewLayout">
+        <div id="windowLayout">
+            <p align="center">Добавление нового макета</p>
+            <label for="name">Имя макета</label>
+            <input type="text" required class="form-control" id="name" name="name" placeholder="Имя" aria-describedby="fstName" pattern="^[А-Яа-яЁё\s]+$">
+            <br>
+            <label for="gender">Для кого</label>
+            <select class="form-control" id="gender" onchange=>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+                <option value="Универсальный">Универсальный</option>
+            </select>
+            <br>
+            <label for="fotoLayout">Фото макета</label>
+            <input type="file" required class="form-control" id="fotoLayout" name="fotoLayout">
+            <br>
+            <label for="fileLayout">Файл макета</label>
+            <input type="file" required class="form-control" id="fileLayout" name="fileLayout">
+            <br>
+            <a href="#" class="close">Отмена</a>
+            <a href="#" class="send">Отправить</a>
+        </div>
+    </div>
+    <div class="table-board" style="width: 100%; margin-top: 6%; height: 780px">
+        <table>
+            <tr>
+                <th ><a href="#getLayout">Получить список моих макетов</a></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th><a href="#setDayOfConcil">Предложение провести собрание</a></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th rowspan="4"><img height="200" width="200" id="photo" src=""></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th><a href="#takeNewLayout">Добавить макет</a></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col">Имя макета</th>
+                <th >Статус</th>
+            </tr>
+        </table>
+    </div>
+</main>
 <div id="center-bottom">
-    <p>ООО "Рога и Толстовки", Разработчик Родионов В. С., 2020</p>
+    <p> Разработчик Родионов В. С., 2020</p>
 </div>
 </body>
 </html>

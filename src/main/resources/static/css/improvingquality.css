@@ -1,0 +1,57 @@
+table {
+    width: 100%; /* Ширина таблицы в процентах */
+    height: 100%;
+}
+.col {
+    width: 100%; /* Ширина ячейки */
+    height: 6%;
+}
+#addNewReport {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+#windowReport {
+    width: 400px;
+    height: 350px;
+    text-align: left;
+    padding: 15px;
+    border: 3px solid #0000cc;
+    border-radius: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: white;
+}
+#addNewReport:target {display: block;}
+.close {
+    display: inline-block;
+    border: 1px solid #0000cc;
+    color: #0000cc;
+    padding: 0 12px;
+    margin: 10px;
+    text-decoration: none;
+    background: #f2f2f2;
+    font-size: 14pt;
+    cursor:pointer;
+
+}
+.send {
+    display: inline-block;
+    border: 1px solid #0000cc;
+    color: #0000cc;
+    padding: 0 12px;
+    margin: 10px;
+    text-decoration: none;
+    background: #f2f2f2;
+    font-size: 14pt;
+    cursor:pointer;
+
+}

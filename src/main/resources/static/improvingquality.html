@@ -2,21 +2,111 @@
 <html lang="ru">
 <head>
     <link href="css/main.css" rel="stylesheet" type="text/css">
-    <link href="css/employee.css" rel="stylesheet" type="text/css">
-    <script src="js/employee.js"></script>
+    <link href="css/improvingquality.css" rel="stylesheet" type="text/css">
+    <script src="js/improvingquality.js"></script>
     <meta charset="UTF-8">
     <title>Рога и Толстовки</title>
 </head>
 <body>
-<div class="header-panel">
-    <a href="login.html" class="button">Войти</a>
-    <a href="home.html" class="button">Главная</a>
-    <a href="%URL%" class="button">Рабочее пространство</a>
-    <!-- Если вошёл - кнопки отключены,  -->
+<div id = "wrap">
+    <header>
+        <div class = "title">Рога и Толстовки</div>
+        <ul class = "menu">
+            <li><a href = "home.html">Главная</a></li>
+            <li><a href = "">Рабочий стол</a></li>
+            <li><a href = "login.html">Войти\Выйти</a></li>
+        </ul>
+    </header>
 </div>
-
+<div id="addNewReport">
+    <div id="windowReport">
+        <p align="center">Отчёт о проверке</p>
+        <label for="test">Макет\материал - </label>
+        <output name="test" id="test"></output>
+        <br>
+        <label for="position">Кто проверил: </label>
+        <output name="position" id="position"></output>
+        <br>
+        <label for="Report">Отчёт о проверке</label><br>
+        <input type="text" required id="Report" class="form-control" name="Report" placeholder="Отчёт" style="width: 390px; height: 200px; font-size:16px; font-family: Tahoma;">
+        <br>
+        <a href="#" class="close">Отмена</a>
+        <a href="#" class="send">Отправить</a>
+    </div>
+</div>
+<main>
+    <div class="table-board" style="width: 100%; margin-top: 6%; height: 780px">
+        <table>
+            <tr>
+                <th colspan="2"><a href="#getLayout">Получить список макетов</a></th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2"><a href="#gatMaterials">Получить список материалов</a></th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2" rowspan="6"><img height="250" width="250" id="photo" src=""></th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2">Материал\макет</th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2">Дата подачи</th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2"><a href="#addNewReport">Отчёт</a></th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2">Разработчик\поставщик</th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2"></th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+            <tr>
+                <th colspan="2" ></th>
+                <th class="col">Имя материала\макета</th>
+                <th >Кнопочка</th>
+            </tr>
+        </table>
+    </div>
+</main>
 <div id="center-bottom">
-    <p>ООО "Рога и Толстовки", Разработчик Родионов В. С., 2020</p>
+    <p>Разработчик Родионов В. С., 2020</p>
 </div>
 </body>
 </html>
